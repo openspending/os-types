@@ -1,0 +1,53 @@
+{
+  "name": "os-types",
+  "version": "0.0.0-semantically-released",
+  "description": "Fiscal Data Type Handling",
+  "main": "dist/index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "babel src/index.js -o dist/index.js",
+    "postbuild": "cp src/os-types.json dist/",
+    "commit": "git-cz",
+    "check-coverage": "istanbul check-coverage --statements 90 --branches 90 --functions 90 --lines 90",
+    "report-coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "start": "npm run test",
+    "test": "mocha src/index.test.js -w --compilers js:babel/register",
+    "test:single": "istanbul cover -x *.test.js _mocha -- -R spec src/index.test.js --compilers js:babel/register",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kentcdodds/starwars-names.git"
+  },
+  "keywords": [],
+  "author": "Adam Kariv <adam.kariv@okfn.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/openspending/os-types/issues"
+  },
+  "homepage": "https://github.com/openspending/os-types#readme",
+  "dependencies": {
+    "coveralls": "^2.11.9",
+    "lodash": "4.10.0",
+    "lodash-addons": "^0.3.1"
+  },
+  "devDependencies": {
+    "babel": "5.8.21",
+    "chai": "3.3.0",
+    "codecov.io": "0.1.6",
+    "commitizen": "1.0.5",
+    "cz-conventional-changelog": "1.1.2",
+    "ghooks": "0.3.2",
+    "istanbul": "git+https://github.com/gotwarlost/istanbul#source-map",
+    "mocha": "2.2.5",
+    "semantic-release": "4.3.5"
+  },
+  "czConfig": {
+    "path": "node_modules/cz-conventional-changelog"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run test:single && npm run check-coverage"
+    }
+  }
+}
