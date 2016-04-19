@@ -26,9 +26,13 @@ class TypeProcessor {
                 return _.hasIn(f, 'title') && _.hasIn(f, 'type');
             });
         // ... and no unknown properties ...
+        var allowedProperties = [
+            'title', 'type', 'format', 'data',  // common properties
+            'currency', 'factor', 'direction', 'phase', // for measures
+        ];
         valid = valid &&
             _.every(fields, (f) => {
-                return _.difference(_.keys(f), ['title', 'type', 'format', 'data']).length == 0;
+                return _.difference(_.keys(f), allowedProperties).length == 0;
             });
         // ... and all types are valid ...
         valid = valid &&
@@ -70,24 +74,32 @@ class TypeProcessor {
         var dimensions = {};
         var measures = {};
         var model = { dimensions, measures };
-        var schema = {};
+        var schema = {fields:{}, primaryKey:[]};
         this.allNames = [];
         _.forEach(fields, (f) => {
             var osType = this.types[f.type];
             f.name = this._titleToName(f.title, f.type);
-            schema[f.title] = {
+            var conceptType = _.split(f.type,':')[0];
+            schema.fields[f.title] = {
                 title: f.title,
                 name: f.name,
                 type: osType.dataType,
-                format: osType.format || f.format || 'default'
+                format: osType.format || f.format || 'default',
+                osType: f.type,
+                conceptType: conceptType,
+                resource: f.resource
             };
 
-            var conceptType = _.split(f.type,':')[0];
             if ( conceptType == 'value' ) {
                 // Measure
                 var measure = {
                     source: f.name,
-                    resource: f.resource
+                    resource: f.resource,
+                    // Extra properties
+                    currency: f.currency,
+                    factor: f.factor,
+                    direction: f.direction,
+                    phase: f.phase
                 };
                 measures[f.name] = measure;
             } else {
@@ -97,23 +109,59 @@ class TypeProcessor {
                 } else {
                     dimension = {
                         dimensionType: osType.dimensionType,
+                        classificationType: osType.classificationType,
                         primaryKey: [],
-                        attributes: {}
+                        attributes: {},
                     };
                     dimensions[conceptType] = dimension;
                 }
                 var attribute = {
                     source: f.name,
+                    title: f.title,
                     resource: f.resource
                 };
                 dimension.attributes[f.name] = attribute;
-                if ( osType.uniqueIdentifier ) {
+                if (osType.uniqueIdentifier) {
                     dimension.primaryKey.push(f.name);
+                    schema.primaryKey.push(f.name);
                 }
             }
         });
+        // Process parent, labelFor
+        var findAttribute = (field, osType) => {
+            if ( field ) {
+                return dimensions[field.conceptType].attributes[field.name];
+            }
+            if ( osType ) {
+                var field = _.find(_.values(schema.fields), (i) => {
+                    return _.startsWith(i.osType, osType);
+                });
+                return findAttribute(field);
+            }
+        };
+        _.forEach(_.values(schema.fields), (field) => {
+            var osType = this.types[field.osType];
+            var labelFor = osType.labelFor;
+            var parent = osType.parent;
+            if ( labelFor || parent ) {
+                var attribute = findAttribute(field);
+                if ( labelFor ) {
+                    var targetAttribute = findAttribute(null, labelFor);
+                    if ( targetAttribute ) {
+                        attribute.labelFor = targetAttribute.source;
+                    }
+                }
+                if ( parent ) {
+                    var targetAttribute = findAttribute(null, parent);
+                    if ( targetAttribute ) {
+                        attribute.parent = targetAttribute.source;
+                    }
+                }
+            }
+        });
+
         var ret = {model, schema};
-        console.log(JSON.stringify(ret));
+        console.log(JSON.stringify(ret,null,2));
         return ret;
     }
 }

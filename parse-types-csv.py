@@ -6,6 +6,8 @@ parsers = {
     'parent': ident,
     'labelFor': ident,
     'dataType': ident,
+    'dimensionType': ident,
+    'classificationType': ident,
     'uniqueIdentifier': lambda x: x=='y',
 }
 

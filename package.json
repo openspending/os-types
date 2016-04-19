@@ -1,6 +1,5 @@
 {
   "name": "os-types",
-  "version": "0.0.0-semantically-released",
   "description": "Fiscal Data Type Handling",
   "main": "dist/index.js",
   "scripts": {
@@ -17,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kentcdodds/starwars-names.git"
+    "url": "https://github.com/openspending/os-types.git"
   },
   "keywords": [],
   "author": "Adam Kariv <adam.kariv@okfn.org>",
@@ -40,7 +39,7 @@
     "ghooks": "0.3.2",
     "istanbul": "git+https://github.com/gotwarlost/istanbul#source-map",
     "mocha": "2.2.5",
-    "semantic-release": "4.3.5"
+    "semantic-release": "^4.3.5"
   },
   "czConfig": {
     "path": "node_modules/cz-conventional-changelog"
