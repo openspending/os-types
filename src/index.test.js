@@ -47,17 +47,20 @@ describe('os-types', function() {
                       _.filter(tp.getAllTypes(), (typ) => {
                           return _.startsWith(typ,'functional-classification:');
                       }), (typ) => {
-                          return typ.split(':')[1]+(_.includes(typ,':') ? ':' : '');
+                          return 'functional-classification:'+typ.split(':')[1]+(_.includes(typ,':') ? ':' : '');
                       }));
           console.log(allPrefixes);
           expect(tp.autoComplete('functional-classification:')).to.eql(allPrefixes);
       });
       it('autocompletes a complex non : ending string', function() {
-          expect(tp.autoComplete('functional-classification:co')).to.eql(['cofog:']);
+          expect(tp.autoComplete('functional-classification:co'))
+              .to.eql(['functional-classification:cofog:']);
       });
       it('autocompletes with leaves and non leaves', function() {
           expect(tp.autoComplete('functional-classification:cofog:group:'))
-              .to.eql(['code:', 'description', 'label']);
+              .to.eql(['functional-classification:cofog:group:code:',
+                       'functional-classification:cofog:group:description',
+                       'functional-classification:cofog:group:label' ]);
       });
   });
 
