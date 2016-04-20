@@ -22,6 +22,45 @@ describe('os-types', function() {
 	});
   });
 
+  describe('autoComplete', function() {
+      it('autocompletes the empty string', function() {
+          var allPrefixes = _.uniq(_.map(tp.getAllTypes(), (typ) => {
+              return typ.split(':')[0]+(_.includes(typ,':') ? ':' : '');
+          }));
+          expect(tp.autoComplete('')).to.eql(allPrefixes);
+      });
+      it('autocompletes a simple string', function() {
+          var allPrefixes =
+              _.uniq(
+                  _.map(
+                      _.filter(tp.getAllTypes(), (typ) => {
+                          return _.startsWith(typ,'a');
+                      }), (typ) => {
+                          return typ.split(':')[0]+(_.includes(typ,':') ? ':' : '');
+          }));
+          expect(tp.autoComplete('a')).to.eql(allPrefixes);
+      });
+      it('autocompletes a simple : ending string', function() {
+          var allPrefixes =
+              _.uniq(
+                  _.map(
+                      _.filter(tp.getAllTypes(), (typ) => {
+                          return _.startsWith(typ,'functional-classification:');
+                      }), (typ) => {
+                          return typ.split(':')[1]+(_.includes(typ,':') ? ':' : '');
+                      }));
+          console.log(allPrefixes);
+          expect(tp.autoComplete('functional-classification:')).to.eql(allPrefixes);
+      });
+      it('autocompletes a complex non : ending string', function() {
+          expect(tp.autoComplete('functional-classification:co')).to.eql(['cofog:']);
+      });
+      it('autocompletes with leaves and non leaves', function() {
+          expect(tp.autoComplete('functional-classification:cofog:group:'))
+              .to.eql(['code:', 'description', 'label']);
+      });
+  });
+
   describe('fieldsToModel', function() {
 	it('detects invalid objects', function() {
 	  var invalids = [null,

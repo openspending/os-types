@@ -12,6 +12,33 @@ class TypeProcessor {
         return Object.keys(this.types);
     };
 
+    autoComplete(prefix) {
+        if ( !prefix ) {
+            prefix = '';
+        }
+        var options = _.filter(this.getAllTypes(), (typ) => {
+          return _.startsWith(typ, prefix);
+        });
+        var prefixLen = prefix.length;
+        var findNextIndex = (typ) => {
+            for ( var i = prefixLen ; i < typ.length ; i++ ) {
+                if ( typ[i] == ":" ) {
+                    break;
+                }
+            }
+            return i;
+        }
+        options = _.map(options, (typ) => {
+            var nextIndex = findNextIndex(typ);
+            var ret = _.last(_.split(typ.slice(0,nextIndex),':'));
+            if ( nextIndex < typ.length ) {
+                ret += typ[nextIndex];
+            }
+            return ret;
+        });
+        return _.uniq(options);
+    };
+
     _checkInput(fields) {
         // Make sure we got an array...
         var valid = _.isArray(fields);
@@ -161,7 +188,6 @@ class TypeProcessor {
         });
 
         var ret = {model, schema};
-        console.log(JSON.stringify(ret,null,2));
         return ret;
     }
 }
