@@ -189,5 +189,32 @@ describe('os-types', function() {
                     .attributes[schema['lvl2-code'].name].parent)
                     .to.be.equal(schema['lvl1-code'].name);
 	});
+    it('adds correctly options for data types and measures', function() {
+      var fields = [
+          {type: 'value', title: 'measure'},
+          {type: 'date:generic', title: 'transaction-date'},
+      ];
+      var ret = tp.fieldsToModel(fields);
+      expect(ret).to.not.equal(null);
+      var model = ret.model;
+      expect(model).to.be.ok;
+      var schema = ret.schema.fields;
+      expect(schema).to.be.ok;
+        expect(_.map(schema['measure'].options, 'name'))
+            .to.be.eql([
+                "decimalChar",
+                "groupChar",
+                "currency",
+                "factor",
+                "direction",
+                "phase"
+        ]);
+        expect(_.map(schema['transaction-date'].options, 'name'))
+            .to.be.eql([
+            'format'
+        ]);
+        expect(schema['transaction-date'].options[0].transform('abc'))
+            .to.be.equal('fmt:abc');
+    });
   });
 });

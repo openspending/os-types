@@ -1,5 +1,6 @@
 'use strict';
 var os_types = require('./os-types.json');
+var extraOptions = require('./extra-options.js');
 var _ = require('lodash-addons');
 
 class TypeProcessor {
@@ -54,9 +55,16 @@ class TypeProcessor {
             });
         // ... and no unknown properties ...
         var allowedProperties = [
-            'title', 'type', 'format', 'data',  // common properties
-            'currency', 'factor', 'direction', 'phase', // for measures
+            'title', 'type', 'format', 'data'  // common properties
         ];
+        _.forEach(_.values(extraOptions), (typeList) => {
+           _.forEach(_.values(typeList), (value) => {
+              allowedProperties =
+                  _.union(allowedProperties,
+                      _.map(value.options, 'name'));
+           });
+        });
+        console.log('allowedProperties', allowedProperties);
         valid = valid &&
             _.every(fields, (f) => {
                 return _.difference(_.keys(f), allowedProperties).length == 0;
@@ -114,7 +122,11 @@ class TypeProcessor {
                 format: osType.format || f.format || 'default',
                 osType: f.type,
                 conceptType: conceptType,
-                resource: f.resource
+                resource: f.resource,
+                options: _.union(
+                    _.get(extraOptions, 'dataTypes.'+osType.dataType+'.options', []),
+                    _.get(extraOptions, 'osTypes.'+f.type+'.options', [])
+                )
             };
 
             if ( conceptType == 'value' ) {
@@ -187,9 +199,9 @@ class TypeProcessor {
             }
         });
 
-        var ret = {model, schema};
-        //console.log(JSON.stringify(ret,null,2));
-        return ret;
+        var fdp = {model, schema};
+        console.log(JSON.stringify(fdp,null,2));
+        return fdp;
     }
 }
 module.exports = TypeProcessor;

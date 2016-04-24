@@ -4,14 +4,14 @@
   "main": "dist/index.js",
   "scripts": {
     "prebuild": "rm -rf dist && mkdir dist",
-    "build": "babel src/index.js -o dist/index.js",
+    "build": "babel src/index.js -o dist/index.js && babel src/extra-options.js -o dist/extra-options.js",
     "postbuild": "cp src/os-types.json dist/",
     "commit": "git-cz",
     "check-coverage": "istanbul check-coverage --statements 90 --branches 90 --functions 90 --lines 90",
     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "start": "npm run test",
     "test": "mocha src/index.test.js -w --compilers js:babel/register",
-    "test:single": "istanbul cover -x *.test.js _mocha -- -R spec src/index.test.js --compilers js:babel/register",
+    "test:single": "cp src/index.test.js dist/ && istanbul cover -x *.test.js _mocha -- -R spec dist/index.test.js --compilers js:babel/register && rm dist/index.test.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "files": [
@@ -30,14 +30,13 @@
   },
   "homepage": "https://github.com/openspending/os-types#readme",
   "dependencies": {
-    "coveralls": "^2.11.9",
     "lodash": "4.10.0",
     "lodash-addons": "^0.3.1"
   },
   "devDependencies": {
     "babel": "5.8.21",
     "chai": "3.3.0",
-    "codecov.io": "0.1.6",
+    "coveralls": "^2.11.9",
     "commitizen": "1.0.5",
     "cz-conventional-changelog": "^1.1.5",
     "ghooks": "0.3.2",
