@@ -42,20 +42,21 @@ class TypeProcessor {
 
     _checkInput(fields) {
         // Make sure we got an array...
-        var valid = _.isArray(fields);
+        var valid = _.isArray(fields) || this._generalError("Fields should be an array");
         // ... of objects ...
         valid = valid &&
             _.every(fields, (f) => {
-                return _.isObject(f);
+                return _.isObject(f) || this._generalError("Field items should be objects");
             });
         // ... with all the mandatory properties ...
         valid = valid &&
             _.every(fields, (f) => {
-                return _.hasIn(f, 'title') && _.hasIn(f, 'type');
+                return (_.hasIn(f, 'title') && _.hasIn(f, 'type')) ||
+                    this._generalError("Field items should have 'title' and 'type'");
             });
         // ... and no unknown properties ...
         var allowedProperties = [
-            'title', 'type', 'format', 'data'  // common properties
+            'title', 'type', 'format', 'data', 'options'  // common properties
         ];
         _.forEach(_.values(extraOptions), (typeList) => {
            _.forEach(_.values(typeList), (value) => {
@@ -64,15 +65,16 @@ class TypeProcessor {
                       _.map(value.options, 'name'));
            });
         });
-        console.log('allowedProperties', allowedProperties);
         valid = valid &&
             _.every(fields, (f) => {
-                return _.difference(_.keys(f), allowedProperties).length == 0;
+                return (_.difference(_.keys(f), allowedProperties).length == 0) ||
+                    this._fieldError(f.title, "Got unknown properties");
             });
         // ... and all types are valid ...
         valid = valid &&
             _.every(fields, (f) => {
-                return _.hasIn(this.types, f.type);
+                return !f.type || _.hasIn(this.types, f.type) ||
+                    this._fieldError(f.title, "Got unknown type " + f.type);
             });
         return valid;
     }
@@ -100,10 +102,33 @@ class TypeProcessor {
         return name;
     }
 
+    _initErrors() {
+        this.errors = { general: [], perField: {} };
+    }
+
+    _generalError(err) {
+        this.errors.general.push(err);
+        return false;
+    }
+
+    _fieldError(field, err) {
+        var fieldErrors = this.errors.perField[field];
+        if (!fieldErrors) {
+            fieldErrors = [];
+            this.errors.perField[field] = fieldErrors;
+        }
+        fieldErrors.push(err);
+        return false;
+    }
+
     fieldsToModel(fields) {
+        // Prepare errors
+        this._initErrors();
         // Detect invalid data
         if ( !this._checkInput(fields) ) {
-            return null;
+            var ret = {errors: this.errors};
+            console.log(JSON.stringify(ret,null,2));
+            return ret;
         }
         // Modelling
         var dimensions = {};
@@ -111,7 +136,7 @@ class TypeProcessor {
         var model = { dimensions, measures };
         var schema = {fields:{}, primaryKey:[]};
         this.allNames = [];
-        _.forEach(fields, (f) => {
+        _.forEach(_.filter(fields, (f) => { return !!f.type; }), (f) => {
             var osType = this.types[f.type];
             f.name = this._titleToName(f.title, f.type);
             var conceptType = _.split(f.type,':')[0];
@@ -200,7 +225,7 @@ class TypeProcessor {
         });
 
         var fdp = {model, schema};
-        console.log(JSON.stringify(fdp,null,2));
+        //console.log(JSON.stringify(fdp,null,2));
         return fdp;
     }
 }

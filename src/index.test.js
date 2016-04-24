@@ -77,12 +77,15 @@ describe('os-types', function() {
 					  [{type:'activity:generic:contract:code', title:'aaa', extra:'bbb'}]
 					  ];
 	  invalids.forEach((s) => {
-		expect(tp.fieldsToModel(s)).to.equal(null);
+		expect(tp.fieldsToModel(s).errors).to.be.ok;
 	  });
 	});
 	it('returns non null for valid objects', function() {
 	  var valids = [
-		[{type:'activity:generic:contract:code', title:'hello world'}]
+          [{type:'activity:generic:contract:code', title:'hello world'}],
+          [{type:'', title:'hello world'}],
+          [{type:null, title:'hello world'}],
+          [{title:'hello world'}]
 	  ];
 	  valids.forEach((s) => {
 		expect(tp.fieldsToModel(s)).to.not.equal(null);
