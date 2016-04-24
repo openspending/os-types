@@ -56,25 +56,33 @@ class TypeProcessor {
             });
         // ... and no unknown properties ...
         var allowedProperties = [
-            'title', 'type', 'format', 'data', 'options'  // common properties
+            'title', 'type', 'format', 'data', 'options', 'additionalOptions' // common properties
         ];
-        _.forEach(_.values(extraOptions), (typeList) => {
-           _.forEach(_.values(typeList), (value) => {
-              allowedProperties =
-                  _.union(allowedProperties,
-                      _.map(value.options, 'name'));
-           });
-        });
         valid = valid &&
             _.every(fields, (f) => {
-                return (_.difference(_.keys(f), allowedProperties).length == 0) ||
-                    this._fieldError(f.title, "Got unknown properties");
+                var diff = _.difference(_.keys(f), allowedProperties);
+                return (diff.length == 0) ||
+                    this._fieldError(f.title, "Got unknown properties "+diff);
             });
         // ... and all types are valid ...
         valid = valid &&
             _.every(fields, (f) => {
                 return !f.type || _.hasIn(this.types, f.type) ||
                     this._fieldError(f.title, "Got unknown type " + f.type);
+            });
+        // ... and no unknown additional options ...
+        valid = valid &&
+            _.every(fields, (f) => {
+                var allowedOptions = _.union(
+                    _.get(extraOptions, 'dataTypes.'+this.types[f.type]+'.options', []),
+                    _.get(extraOptions, 'osTypes.'+f.type+'.options', [])
+                );
+                allowedOptions = _.map(allowedOptions, 'name');
+                var options = _.get(f, 'options', {});
+                options = _.keys(options);
+                var diff = _.difference(options, allowedOptions);
+                return (diff.length == 0) ||
+                    this._fieldError(f.title, "Got unknown options key "+diff);
             });
         return valid;
     }

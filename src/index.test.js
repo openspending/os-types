@@ -74,7 +74,8 @@ describe('os-types', function() {
 					  [{type:'activity:generic:contract:code'}],
 					  [{type:'moshe', title:'miko'}],
 					  ["arr"],
-					  [{type:'activity:generic:contract:code', title:'aaa', extra:'bbb'}]
+					  [{type:'activity:generic:contract:code', title:'aaa', extra:'bbb'}],
+					  [{type:'activity:generic:contract:code', title:'aaa', options:{'bbb':1}}]
 					  ];
 	  invalids.forEach((s) => {
 		expect(tp.fieldsToModel(s).errors).to.be.ok;
@@ -84,11 +85,10 @@ describe('os-types', function() {
 	  var valids = [
           [{type:'activity:generic:contract:code', title:'hello world'}],
           [{type:'', title:'hello world'}],
-          [{type:null, title:'hello world'}],
-          [{title:'hello world'}]
+          [{type:null, title:'hello world'}]
 	  ];
 	  valids.forEach((s) => {
-		expect(tp.fieldsToModel(s)).to.not.equal(null);
+		expect(tp.fieldsToModel(s).schema).to.be.ok;
 	  });
 	});
 	it('slugifies correctly titles', function() {
