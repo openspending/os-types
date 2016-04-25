@@ -51,24 +51,24 @@ class TypeProcessor {
         // ... with all the mandatory properties ...
         valid = valid &&
             _.every(fields, (f) => {
-                return (_.hasIn(f, 'title') && _.hasIn(f, 'type')) ||
-                    this._generalError("Field items should have 'title' and 'type'");
+                return (_.hasIn(f, 'name') && _.hasIn(f, 'type')) ||
+                    this._generalError("Field items should have 'name' and 'type'");
             });
         // ... and no unknown properties ...
         var allowedProperties = [
-            'title', 'type', 'format', 'data', 'options', 'resource' // common properties
+            'name', 'title', 'type', 'format', 'data', 'options', 'resource' // common properties
         ];
         valid = valid &&
             _.every(fields, (f) => {
                 var diff = _.difference(_.keys(f), allowedProperties);
                 return (diff.length == 0) ||
-                    this._fieldError(f.title, "Got unknown properties "+diff);
+                    this._fieldError(f.name, "Got unknown properties "+diff);
             });
         // ... and all types are valid ...
         valid = valid &&
             _.every(fields, (f) => {
                 return !f.type || _.hasIn(this.types, f.type) ||
-                    this._fieldError(f.title, "Got unknown type " + f.type);
+                    this._fieldError(f.name, "Got unknown type " + f.type);
             });
         // ... and no unknown additional options ...
         valid = valid &&
@@ -83,32 +83,32 @@ class TypeProcessor {
                 options = _.keys(options);
                 var diff = _.difference(options, allowedOptions);
                 return (diff.length == 0) ||
-                    this._fieldError(f.title, "Got unknown options key "+diff);
+                    this._fieldError(f.name, "Got unknown options key "+diff);
             });
         return valid;
     }
 
-    _titleToName(title, type) {
+    _titleToSlug(title, type) {
         var slugRe = new RegExp('[a-zA-Z0-9]+','g');
         var vowelsRe = new RegExp('[aeiou]+','g');
         var slugs = _.deburr(title).match(slugRe);
         if ( slugs == null || slugs.length == 0 ) {
             slugs = _.join(type.split(vowelsRe),'').match(slugRe);
         }
-        var name = _.join(slugs, '_');
-        if ( this.allNames.indexOf(name) >= 0 ) {
+        var slug = _.join(slugs, '_');
+        if ( this.allNames.indexOf(slug) >= 0 ) {
             let i = 2;
             while ( true ) {
-                let attempt = name + '_' + i;
+                let attempt = slug + '_' + i;
                 if ( this.allNames.indexOf(attempt) < 0 ) {
-                    name = attempt;
+                    slug = attempt;
                     break;
                 }
                 i+=1;
             }
         }
-        this.allNames.push(name)
-        return name;
+        this.allNames.push(slug)
+        return slug;
     }
 
     _initErrors() {
@@ -158,11 +158,15 @@ class TypeProcessor {
         this.allNames = [];
         _.forEach(_.filter(fields, (f) => { return !!f.type; }), (f) => {
             var osType = this.types[f.type];
-            f.name = this._titleToName(f.title, f.type);
+            if (!f.title) {
+                f.title = f.name;
+            }
+            f.slug = this._titleToSlug(f.title, f.type);
             var conceptType = _.split(f.type,':')[0];
             schema.fields[f.title] = {
                 title: f.title,
                 name: f.name,
+                slug: f.slug,
                 type: osType.dataType,
                 format: osType.format || f.format || 'default',
                 osType: f.type,
@@ -179,11 +183,12 @@ class TypeProcessor {
                 // Measure
                 var measure = {
                     source: f.name,
+                    title: f.title
                 }
                 // Extra properties
                 if (f.resource)          { measure.resource = f.resource; }
                 this._embedOptions(measure, f.options, _.get(extraOptions, 'osTypes.value.options', []));
-                measures[f.name] = measure;
+                measures[f.slug] = measure;
             } else {
                 let dimension;
                 if ( _.hasIn(dimensions, conceptType) ) {
@@ -201,14 +206,14 @@ class TypeProcessor {
                 }
                 var attribute = {
                     source: f.name,
-                    title: f.title,
+                    title: f.title
                 };
                 if ( f.resource ) {
                     attribute.resource = f.resource;
                 }
-                dimension.attributes[f.name] = attribute;
+                dimension.attributes[f.slug] = attribute;
                 if (osType.uniqueIdentifier) {
-                    dimension.primaryKey.push(f.name);
+                    dimension.primaryKey.push(f.slug);
                     schema.primaryKey.push(f.name);
                 }
             }
@@ -216,7 +221,7 @@ class TypeProcessor {
         // Process parent, labelFor
         var findAttribute = (field, osType) => {
             if ( field ) {
-                return dimensions[field.conceptType].attributes[field.name];
+                return {key:field.slug, attr:dimensions[field.conceptType].attributes[field.slug]};
             }
             if ( osType ) {
                 var field = _.find(_.values(schema.fields), (i) => {
@@ -230,17 +235,17 @@ class TypeProcessor {
             var labelFor = osType.labelFor;
             var parent = osType.parent;
             if ( labelFor || parent ) {
-                var attribute = findAttribute(field);
+                var attribute = findAttribute(field).attr;
                 if ( labelFor ) {
                     var targetAttribute = findAttribute(null, labelFor);
                     if ( targetAttribute ) {
-                        attribute.labelFor = targetAttribute.source;
+                        attribute.labelFor = targetAttribute.key;
                     }
                 }
                 if ( parent ) {
                     var targetAttribute = findAttribute(null, parent);
                     if ( targetAttribute ) {
-                        attribute.parent = targetAttribute.source;
+                        attribute.parent = targetAttribute.key;
                     }
                 }
             }

@@ -49,7 +49,6 @@ describe('os-types', function() {
             }), (typ) => {
               return 'functional-classification:' + typ.split(':')[1] + (_.includes(typ, ':') ? ':' : '');
             }));
-      console.log(allPrefixes);
       expect(tp.autoComplete('functional-classification:')).to.eql(allPrefixes);
     });
     it('autocompletes a complex non : ending string', function () {
@@ -72,10 +71,10 @@ describe('os-types', function() {
           [{}],
         [{title: 'moshe'}],
         [{type: 'activity:generic:contract:code'}],
-        [{type: 'moshe', title: 'miko'}],
+        [{type: 'moshe', name: 'miko'}],
         ["arr"],
-        [{type: 'activity:generic:contract:code', title: 'aaa', extra: 'bbb'}],
-        [{type: 'activity:generic:contract:code', title: 'aaa', options: {'bbb': 1}}]
+        [{type: 'activity:generic:contract:code', name: 'aaa', extra: 'bbb'}],
+        [{type: 'activity:generic:contract:code', name: 'aaa', options: {'bbb': 1}}]
       ];
       invalids.forEach((s) => {
         expect(tp.fieldsToModel(s).errors).to.be.ok;
@@ -83,9 +82,9 @@ describe('os-types', function() {
     });
     it('returns non null for valid objects', function () {
       var valids = [
-        [{type: 'activity:generic:contract:code', title: 'hello world'}],
-        [{type: '', title: 'hello world'}],
-        [{type: null, title: 'hello world'}]
+        [{type: 'activity:generic:contract:code', name: 'hello world'}],
+        [{type: '', name: 'hello world'}],
+        [{type: null, name: 'hello world'}]
       ];
       valids.forEach((s) => {
         expect(tp.fieldsToModel(s).schema).to.be.ok;
@@ -111,13 +110,13 @@ describe('os-types', function() {
       title_pairs.forEach((titles) => {
         let s = [];
         for (let i = 0; i < titles.length; i++) {
-          s.push({type: types[i], title: titles[i][0]});
+          s.push({type: types[i], name: titles[i][0]});
         }
         var model = tp.fieldsToModel(s);
         expect(model).to.not.equal(null);
         var schema = model.schema;
         titles.forEach((pair) => {
-          expect(schema.fields[pair[0]].name).to.equal(pair[1]);
+          expect(schema.fields[pair[0]].slug).to.equal(pair[1]);
         });
       });
     });
@@ -135,20 +134,20 @@ describe('os-types', function() {
       title_pairs.forEach((titles) => {
         let s = [];
         for (let i = 0; i < titles.length; i++) {
-          s.push({type: types[i], title: titles[i][0]});
+          s.push({type: types[i], name: titles[i][0]});
         }
         var model = tp.fieldsToModel(s);
         expect(model).to.not.equal(null);
         var schema = model.schema;
         titles.forEach((pair) => {
-          expect(schema.fields[pair[0]].name).to.equal(pair[1]);
+          expect(schema.fields[pair[0]].slug).to.equal(pair[1]);
         });
       });
     });
     it('creates correctly dimensions & measures', function () {
       var fields = _.map(tp.getAllTypes(), (type) => {
-        var title = type.replace(/:/g, ' ');
-        return {title, type};
+        var name = type.replace(/:/g, ' ');
+        return {name, type};
       });
       var ret = tp.fieldsToModel(fields);
       expect(ret).to.not.equal(null);
@@ -159,7 +158,7 @@ describe('os-types', function() {
       _.forEach(_.values(ret.schema.fields), (field) => {
         if (field.conceptType != 'value') {
           expect(model.dimensions[field.conceptType]).to.be.ok;
-          var attr = model.dimensions[field.conceptType].attributes[field.name];
+          var attr = model.dimensions[field.conceptType].attributes[field.slug];
           expect(attr).to.be.ok;
           expect(attr.source).to.equal(field.name);
           expect(attr.title).to.equal(field.title);
@@ -171,10 +170,10 @@ describe('os-types', function() {
     });
     it('adds correctly labelFor and parent', function () {
       var fields = [
-        {type: 'administrative-classification:generic:level1:code:part', title: 'lvl1-code'},
-        {type: 'administrative-classification:generic:level1:label', title: 'lvl1-label'},
-        {type: 'administrative-classification:generic:level2:code:part', title: 'lvl2-code'},
-        {type: 'administrative-classification:generic:level2:label', title: 'lvl2-label'}
+        {type: 'administrative-classification:generic:level1:code:part', name: 'lvl1-code'},
+        {type: 'administrative-classification:generic:level1:label', name: 'lvl1-label'},
+        {type: 'administrative-classification:generic:level2:code:part', name: 'lvl2-code'},
+        {type: 'administrative-classification:generic:level2:label', name: 'lvl2-label'}
       ];
       var ret = tp.fieldsToModel(fields);
       expect(ret).to.not.equal(null);
@@ -183,19 +182,19 @@ describe('os-types', function() {
       expect(model).to.be.ok;
       expect(model.dimensions).to.be.ok;
       expect(model.dimensions['administrative-classification']
-        .attributes[schema['lvl1-label'].name].labelFor)
-        .to.be.equal(schema['lvl1-code'].name);
+        .attributes[schema['lvl1-label'].slug].labelFor)
+        .to.be.equal(schema['lvl1-code'].slug);
       expect(model.dimensions['administrative-classification']
-        .attributes[schema['lvl2-label'].name].labelFor)
-        .to.be.equal(schema['lvl2-code'].name);
+        .attributes[schema['lvl2-label'].slug].labelFor)
+        .to.be.equal(schema['lvl2-code'].slug);
       expect(model.dimensions['administrative-classification']
-        .attributes[schema['lvl2-code'].name].parent)
-        .to.be.equal(schema['lvl1-code'].name);
+        .attributes[schema['lvl2-code'].slug].parent)
+        .to.be.equal(schema['lvl1-code'].slug);
     });
     it('suggests correctly options for data types and measures', function () {
       var fields = [
-        {type: 'value', title: 'measure'},
-        {type: 'date:generic', title: 'transaction-date'},
+        {type: 'value', name: 'measure'},
+        {type: 'date:generic', name: 'transaction-date'},
       ];
       var ret = tp.fieldsToModel(fields);
       expect(ret).to.not.equal(null);
@@ -221,7 +220,7 @@ describe('os-types', function() {
     });
     it('embeds correctly options in schema, measures and dimensions', function () {
       var fields = [
-        {type: 'value', title: 'measure', options: {
+        {type: 'value', name: 'measure', options: {
           decimalChar: 'dc',
           groupChar: 'gc',
           currency: 'cur',
@@ -229,7 +228,7 @@ describe('os-types', function() {
           direction: 'dir',
           phase: 'pha'
         }, resource: 'res1'},
-        {type: 'date:generic', title: 'transaction_date', resource: 'res2', options: {
+        {type: 'date:generic', name: 'transaction_date', resource: 'res2', options: {
           format: 'fmt:12345'
         }}
       ];
@@ -244,7 +243,6 @@ describe('os-types', function() {
       expect(model.dimensions.date.attributes.transaction_date.resource).to.be.equal('res2');
       var schema = ret.schema;
       expect(schema).to.be.ok;
-      console.log(schema);
       expect(schema.fields.measure.decimalChar).to.be.equal('dc');
       expect(schema.fields.measure.groupChar).to.be.equal('gc');
       expect(schema.fields.measure.type).to.be.equal('number');
