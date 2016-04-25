@@ -56,7 +56,7 @@ class TypeProcessor {
             });
         // ... and no unknown properties ...
         var allowedProperties = [
-            'title', 'type', 'format', 'data', 'options', 'additionalOptions' // common properties
+            'title', 'type', 'format', 'data', 'options', 'resource' // common properties
         ];
         valid = valid &&
             _.every(fields, (f) => {
@@ -73,8 +73,9 @@ class TypeProcessor {
         // ... and no unknown additional options ...
         valid = valid &&
             _.every(fields, (f) => {
+                if ( !f.type ) { return true; }
                 var allowedOptions = _.union(
-                    _.get(extraOptions, 'dataTypes.'+this.types[f.type]+'.options', []),
+                    _.get(extraOptions, 'dataTypes.'+this.types[f.type].dataType+'.options', []),
                     _.get(extraOptions, 'osTypes.'+f.type+'.options', [])
                 );
                 allowedOptions = _.map(allowedOptions, 'name');
@@ -129,6 +130,17 @@ class TypeProcessor {
         return false;
     }
 
+    _embedOptions(target, options, availableOptions) {
+        _.forEach(availableOptions, (availableOption) => {
+            var n = availableOption.name;
+            if (_.hasIn(options, n)) {
+                target[n] = options[n];
+            } else if (_.hasIn(availableOption, 'defaultValue')) {
+                target[n] = availableOption.defaultValue;
+            }
+        });
+    }
+
     fieldsToModel(fields) {
         // Prepare errors
         this._initErrors();
@@ -161,18 +173,16 @@ class TypeProcessor {
                     _.get(extraOptions, 'osTypes.'+f.type+'.options', [])
                 )
             };
+            this._embedOptions(schema.fields[f.title], f.options, _.get(extraOptions, 'dataTypes.'+osType.dataType+'.options', []));
 
             if ( conceptType == 'value' ) {
                 // Measure
                 var measure = {
                     source: f.name,
-                    resource: f.resource,
-                    // Extra properties
-                    currency: f.currency,
-                    factor: f.factor,
-                    direction: f.direction,
-                    phase: f.phase
-                };
+                }
+                // Extra properties
+                if (f.resource)          { measure.resource = f.resource; }
+                this._embedOptions(measure, f.options, _.get(extraOptions, 'osTypes.value.options', []));
                 measures[f.name] = measure;
             } else {
                 let dimension;
@@ -181,17 +191,21 @@ class TypeProcessor {
                 } else {
                     dimension = {
                         dimensionType: osType.dimensionType,
-                        classificationType: osType.classificationType,
                         primaryKey: [],
                         attributes: {},
                     };
+                    if ( osType.classificationType ) {
+                        dimension.classificationType = osType.classificationType;
+                    }
                     dimensions[conceptType] = dimension;
                 }
                 var attribute = {
                     source: f.name,
                     title: f.title,
-                    resource: f.resource
                 };
+                if ( f.resource ) {
+                    attribute.resource = f.resource;
+                }
                 dimension.attributes[f.name] = attribute;
                 if (osType.uniqueIdentifier) {
                     dimension.primaryKey.push(f.name);
