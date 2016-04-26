@@ -218,7 +218,7 @@ class TypeProcessor {
                 }
             }
         });
-        // Process parent, labelFor
+        // Process parent, labelfor
         var findAttribute = (field, osType) => {
             if ( field ) {
                 return {key:field.slug, attr:dimensions[field.conceptType].attributes[field.slug]};
@@ -232,14 +232,14 @@ class TypeProcessor {
         };
         _.forEach(_.values(schema.fields), (field) => {
             var osType = this.types[field.osType];
-            var labelFor = osType.labelFor;
+            var labelfor = osType.labelfor;
             var parent = osType.parent;
-            if ( labelFor || parent ) {
+            if ( labelfor || parent ) {
                 var attribute = findAttribute(field).attr;
-                if ( labelFor ) {
-                    var targetAttribute = findAttribute(null, labelFor);
+                if ( labelfor ) {
+                    var targetAttribute = findAttribute(null, labelfor);
                     if ( targetAttribute ) {
-                        attribute.labelFor = targetAttribute.key;
+                        attribute.labelfor = targetAttribute.key;
                     }
                 }
                 if ( parent ) {
@@ -249,6 +249,12 @@ class TypeProcessor {
                     }
                 }
             }
+        });
+        // Fix primary keys in case they're missing
+        _.forEach(model.dimensions, (dimension) => {
+           if (dimension.primaryKey.length == 0) {
+               dimension.primaryKey = _.keys(dimension.attributes);
+           }
         });
 
         var fdp = {model, schema};

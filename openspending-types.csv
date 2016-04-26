@@ -1,4 +1,4 @@
-type,type,type,type,type,parent,labelFor,dimensionType,classificationType,dataType,dataFormat,uniqueIdentifier,constraints
+type,type,type,type,type,parent,labelfor,dimensionType,classificationType,dataType,dataFormat,uniqueIdentifier,constraints
 functional-classification,cofog,division,code,full,,,classification,functional,string,,y,
 ,,,,part,,,classification,functional,string,,y,
 ,,,label,,,functional-classification:cofog:division:code,classification,functional,string,,,

@@ -168,7 +168,7 @@ describe('os-types', function() {
         }
       });
     });
-    it('adds correctly labelFor and parent', function () {
+    it('adds correctly labelfor and parent', function () {
       var fields = [
         {type: 'administrative-classification:generic:level1:code:part', name: 'lvl1-code'},
         {type: 'administrative-classification:generic:level1:label', name: 'lvl1-label'},
@@ -182,10 +182,10 @@ describe('os-types', function() {
       expect(model).to.be.ok;
       expect(model.dimensions).to.be.ok;
       expect(model.dimensions['administrative-classification']
-        .attributes[schema['lvl1-label'].slug].labelFor)
+        .attributes[schema['lvl1-label'].slug].labelfor)
         .to.be.equal(schema['lvl1-code'].slug);
       expect(model.dimensions['administrative-classification']
-        .attributes[schema['lvl2-label'].slug].labelFor)
+        .attributes[schema['lvl2-label'].slug].labelfor)
         .to.be.equal(schema['lvl2-code'].slug);
       expect(model.dimensions['administrative-classification']
         .attributes[schema['lvl2-code'].slug].parent)

@@ -4,7 +4,7 @@ import json
 ident = lambda x: x
 parsers = {
     'parent': ident,
-    'labelFor': ident,
+    'labelfor': ident,
     'dataType': ident,
     'dimensionType': ident,
     'classificationType': ident,
