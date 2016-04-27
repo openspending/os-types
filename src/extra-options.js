@@ -8,19 +8,16 @@ module.exports =
         {
           name: 'currency',
           title: 'Currency',
-          defaultValue: null,
           values: []
         },
         {
           name: 'factor',
           title: 'Factor',
-          defaultValue: '',
           type: 'number'
         },
         {
           name: 'direction',
           title: 'Direction',
-          defaultValue: '',
           values: [
             {name: '', value: ''},
             {name: 'Expenditure', value: 'expenditure'},
@@ -30,7 +27,6 @@ module.exports =
         {
           name: 'phase',
           title: 'Phase',
-          defaultValue: '',
           values: [
             {name: '', value: ''},
             {name: 'Proposed', value: 'proposed'},

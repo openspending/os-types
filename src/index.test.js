@@ -250,5 +250,26 @@ describe('os-types', function() {
       expect(schema.fields.transaction_date.type).to.be.equal('date');
       expect(schema.fields.transaction_date.format).to.be.equal('fmt:12345');
     });
+    it('embeds correctly default values for options in measures', function () {
+      var fields = [
+          {type: 'value', name: 'measure', options: {
+              decimalChar: 'dc',
+              factor: 12
+          }, resource: 'res1'},
+          {type: 'date:generic', name: 'transaction_date', resource: 'res2', options: {
+              format: 'fmt:12345'
+          }}
+      ];
+      var ret = tp.fieldsToModel(fields);
+      expect(ret).to.not.equal(null);
+      var model = ret.model;
+      expect(model).to.be.ok;
+      expect(model.measures.measure.currency).to.be.undefined;
+      expect(model.measures.measure.direction).to.be.undefined;
+      expect(model.measures.measure.phase).to.be.undefined;
+      var schema = ret.schema;
+      expect(schema).to.be.ok;
+      expect(schema.fields.measure.groupChar).to.be.equal(',');;
+    });
   });
 });
