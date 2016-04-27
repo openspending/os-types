@@ -133,7 +133,7 @@ class TypeProcessor {
     _embedOptions(target, options, availableOptions) {
         _.forEach(availableOptions, (availableOption) => {
             var n = availableOption.name;
-            if (_.hasIn(options, n)) {
+            if (_.hasIn(options, n) && options[n]) {
                 target[n] = options[n];
             } else if (_.hasIn(availableOption, 'defaultValue')) {
                 target[n] = availableOption.defaultValue;
