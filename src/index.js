@@ -2,6 +2,7 @@
 var os_types = require('./os-types.json');
 var extraOptions = require('./extra-options.js');
 var _ = require('lodash-addons');
+var JTS = require('jsontableschema').types;
 
 class TypeProcessor {
 
@@ -38,6 +39,20 @@ class TypeProcessor {
             return ret;
         });
         return _.uniq(options);
+    }
+
+    _getJTSTypeByName(name, options) {
+        return _.find(
+          _.map(_.toPairs(JTS), function(pair) {
+            var JTSType = pair[0];
+            var JTSTypeValue = pair[1];
+            if (_.endsWith(JTSType, 'Type') ) {
+                var ret = new JTSTypeValue(options);
+                if (ret.name == name) {
+                    return ret;
+                }
+            }
+        }));
     }
 
     _checkInput(fields) {
@@ -85,15 +100,32 @@ class TypeProcessor {
                 return (diff.length == 0) ||
                     this._fieldError(f.name, "Got unknown options key "+diff);
             });
+        // ... and data samples match the selected datatype ...
+        valid = valid &&
+            _.every(fields, (f) => {
+                if ( f.data ) {
+                    var options = _.pick(f.options,
+                      _.map(
+                        _.get(extraOptions, 'dataTypes.'+this.types[f.type].dataType+'.options', []),
+                        'name')
+                    );
+                    var jtsType = this._getJTSTypeByName(this.types[f.type].dataType, options);
+                    return _.every(f.data, (datum) => {
+                        return jtsType.cast(datum) ||
+                          this._fieldError(f.name, "Data cannot be cast to this type '"+datum+"'");
+                    });
+                } else {
+                    return true;
+                }
+            });
         return valid;
     }
 
     _titleToSlug(title, type) {
         var slugRe = new RegExp('[a-zA-Z0-9]+','g');
-        var vowelsRe = new RegExp('[aeiou]+','g');
         var slugs = _.deburr(title).match(slugRe);
         if ( slugs == null || slugs.length == 0 ) {
-            slugs = _.join(type.split(vowelsRe),'').match(slugRe);
+            slugs = type.match(slugRe);
         }
         var slug = _.join(slugs, '_');
         if ( this.allNames.indexOf(slug) >= 0 ) {
@@ -133,10 +165,11 @@ class TypeProcessor {
     _embedOptions(target, options, availableOptions) {
         _.forEach(availableOptions, (availableOption) => {
             var n = availableOption.name;
+            var transform = availableOption.transform || (x => { return x; });
             if (_.hasIn(options, n) && options[n]) {
-                target[n] = options[n];
+                target[n] = transform(options[n]);
             } else if (_.hasIn(availableOption, 'defaultValue')) {
-                target[n] = availableOption.defaultValue;
+                target[n] = transform(availableOption.defaultValue);
             }
         });
     }
@@ -147,7 +180,7 @@ class TypeProcessor {
         // Detect invalid data
         if ( !this._checkInput(fields) ) {
             var ret = {errors: this.errors};
-            console.log(JSON.stringify(ret,null,2));
+            //console.log(JSON.stringify(ret,null,2));
             return ret;
         }
         // Modelling
@@ -255,6 +288,31 @@ class TypeProcessor {
            if (dimension.primaryKey.length == 0) {
                dimension.primaryKey = _.keys(dimension.attributes);
            }
+        });
+        // Reorder primary keys based on parents
+        _.forEach(model.dimensions, (dimension, name) => {
+            while (true) {
+                var swaps = 0;
+                var primaryKey = dimension.primaryKey;
+                for (let i = 0 ; i < primaryKey.length ; i++) {
+                    var attrib = dimension.attributes[primaryKey[i]];
+                    if (!attrib.parent) {
+                        continue;
+                    }
+                    for (let j = i+1 ; j < primaryKey.length ; j++) {
+                        if (primaryKey[j] == attrib.parent) {
+                            var temp = primaryKey[i];
+                            primaryKey[i] = primaryKey[j];
+                            primaryKey[j] = temp;
+                            swaps++;
+                            break;
+                        }
+                    }
+                }
+                if (swaps == 0) {
+                    break;
+                }
+            }
         });
 
         var fdp = {model, schema};

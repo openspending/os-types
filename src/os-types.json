@@ -31,13 +31,7 @@
     "dimensionType": "activity", 
     "labelfor": "activity:generic:project:code"
   }, 
-  "administrative-classification:generic:code:full": {
-    "classificationType": "administrative", 
-    "dataType": "string", 
-    "dimensionType": "classification", 
-    "uniqueIdentifier": true
-  }, 
-  "administrative-classification:generic:code:part": {
+  "administrative-classification:generic:code": {
     "classificationType": "administrative", 
     "dataType": "string", 
     "dimensionType": "classification", 
@@ -151,7 +145,107 @@
     "dataType": "string", 
     "dimensionType": "classification", 
     "labelfor": "administrative-classification:generic:level4:code"
-  }, 
+  },
+  "administrative-classification:generic:level5:code:full": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "administrative-classification:generic:level4:code",
+    "uniqueIdentifier": true
+  },
+  "administrative-classification:generic:level5:code:part": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "administrative-classification:generic:level4:code",
+    "uniqueIdentifier": true
+  },
+  "administrative-classification:generic:level5:description": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification"
+  },
+  "administrative-classification:generic:level5:label": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "administrative-classification:generic:level5:code"
+  },
+  "administrative-classification:generic:level6:code:full": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "administrative-classification:generic:level5:code",
+    "uniqueIdentifier": true
+  },
+  "administrative-classification:generic:level6:code:part": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "administrative-classification:generic:level5:code",
+    "uniqueIdentifier": true
+  },
+  "administrative-classification:generic:level6:description": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification"
+  },
+  "administrative-classification:generic:level6:label": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "administrative-classification:generic:level6:code"
+  },
+  "administrative-classification:generic:level7:code:full": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "administrative-classification:generic:level6:code",
+    "uniqueIdentifier": true
+  },
+  "administrative-classification:generic:level7:code:part": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "administrative-classification:generic:level6:code",
+    "uniqueIdentifier": true
+  },
+  "administrative-classification:generic:level7:description": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification"
+  },
+  "administrative-classification:generic:level7:label": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "administrative-classification:generic:level7:code"
+  },
+  "administrative-classification:generic:level8:code:full": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "administrative-classification:generic:level7:code",
+    "uniqueIdentifier": true
+  },
+  "administrative-classification:generic:level8:code:part": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "administrative-classification:generic:level7:code",
+    "uniqueIdentifier": true
+  },
+  "administrative-classification:generic:level8:description": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification"
+  },
+  "administrative-classification:generic:level8:label": {
+    "classificationType": "administrative",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "administrative-classification:generic:level8:code"
+  },
   "administrator:generic:id": {
     "dataType": "string", 
     "dimensionType": "entity", 
@@ -181,18 +275,12 @@
     "dimensionType": "other", 
     "uniqueIdentifier": true
   }, 
-  "economic-classification:generic:code:full": {
+  "economic-classification:generic:code": {
     "classificationType": "economic", 
     "dataType": "string", 
     "dimensionType": "classification", 
     "uniqueIdentifier": true
-  }, 
-  "economic-classification:generic:code:part": {
-    "classificationType": "economic", 
-    "dataType": "string", 
-    "dimensionType": "classification", 
-    "uniqueIdentifier": true
-  }, 
+  },
   "economic-classification:generic:description": {
     "classificationType": "economic", 
     "dataType": "string", 
@@ -300,7 +388,107 @@
     "dataType": "string", 
     "dimensionType": "classification", 
     "labelfor": "economic-classification:generic:level4:code"
-  }, 
+  },
+  "economic-classification:generic:level5:code:full": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "economic-classification:generic:level4:code",
+    "uniqueIdentifier": true
+  },
+  "economic-classification:generic:level5:code:part": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "economic-classification:generic:level4:code",
+    "uniqueIdentifier": true
+  },
+  "economic-classification:generic:level5:description": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification"
+  },
+  "economic-classification:generic:level5:label": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "economic-classification:generic:level5:code"
+  },
+  "economic-classification:generic:level6:code:full": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "economic-classification:generic:level5:code",
+    "uniqueIdentifier": true
+  },
+  "economic-classification:generic:level6:code:part": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "economic-classification:generic:level5:code",
+    "uniqueIdentifier": true
+  },
+  "economic-classification:generic:level6:description": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification"
+  },
+  "economic-classification:generic:level6:label": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "economic-classification:generic:level6:code"
+  },
+  "economic-classification:generic:level7:code:full": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "economic-classification:generic:level6:code",
+    "uniqueIdentifier": true
+  },
+  "economic-classification:generic:level7:code:part": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "economic-classification:generic:level6:code",
+    "uniqueIdentifier": true
+  },
+  "economic-classification:generic:level7:description": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification"
+  },
+  "economic-classification:generic:level7:label": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "economic-classification:generic:level7:code"
+  },
+  "economic-classification:generic:level8:code:full": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "economic-classification:generic:level7:code",
+    "uniqueIdentifier": true
+  },
+  "economic-classification:generic:level8:code:part": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "economic-classification:generic:level7:code",
+    "uniqueIdentifier": true
+  },
+  "economic-classification:generic:level8:description": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification"
+  },
+  "economic-classification:generic:level8:label": {
+    "classificationType": "economic",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "economic-classification:generic:level8:code"
+  },
   "economic-classification:gfsm:level1:code": {
     "classificationType": "economic", 
     "dataType": "string", 
@@ -401,13 +589,7 @@
     "dimensionType": "classification", 
     "labelfor": "functional-classification:cofog:class:code"
   }, 
-  "functional-classification:cofog:code:full": {
-    "classificationType": "functional", 
-    "dataType": "string", 
-    "dimensionType": "classification", 
-    "uniqueIdentifier": true
-  }, 
-  "functional-classification:cofog:code:part": {
+  "functional-classification:cofog:code": {
     "classificationType": "functional", 
     "dataType": "string", 
     "dimensionType": "classification", 
@@ -472,13 +654,7 @@
     "dimensionType": "classification", 
     "labelfor": "functional-classification:cofog:code"
   }, 
-  "functional-classification:generic:code:full": {
-    "classificationType": "functional", 
-    "dataType": "string", 
-    "dimensionType": "classification", 
-    "uniqueIdentifier": true
-  }, 
-  "functional-classification:generic:code:part": {
+  "functional-classification:generic:code": {
     "classificationType": "functional", 
     "dataType": "string", 
     "dimensionType": "classification", 
@@ -592,6 +768,106 @@
     "dimensionType": "classification", 
     "labelfor": "functional-classification:generic:level4:code"
   }, 
+  "functional-classification:generic:level5:code:full": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "functional-classification:generic:level4:code",
+    "uniqueIdentifier": true
+  },
+  "functional-classification:generic:level5:code:part": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "functional-classification:generic:level4:code",
+    "uniqueIdentifier": true
+  },
+  "functional-classification:generic:level5:description": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification"
+  },
+  "functional-classification:generic:level5:label": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "functional-classification:generic:level5:code"
+  },
+  "functional-classification:generic:level6:code:full": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "functional-classification:generic:level5:code",
+    "uniqueIdentifier": true
+  },
+  "functional-classification:generic:level6:code:part": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "functional-classification:generic:level5:code",
+    "uniqueIdentifier": true
+  },
+  "functional-classification:generic:level6:description": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification"
+  },
+  "functional-classification:generic:level6:label": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "functional-classification:generic:level6:code"
+  },
+  "functional-classification:generic:level7:code:full": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "functional-classification:generic:level6:code",
+    "uniqueIdentifier": true
+  },
+  "functional-classification:generic:level7:code:part": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "functional-classification:generic:level6:code",
+    "uniqueIdentifier": true
+  },
+  "functional-classification:generic:level7:description": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification"
+  },
+  "functional-classification:generic:level7:label": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "functional-classification:generic:level7:code"
+  },
+  "functional-classification:generic:level8:code:full": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "functional-classification:generic:level7:code",
+    "uniqueIdentifier": true
+  },
+  "functional-classification:generic:level8:code:part": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "functional-classification:generic:level7:code",
+    "uniqueIdentifier": true
+  },
+  "functional-classification:generic:level8:description": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification"
+  },
+  "functional-classification:generic:level8:label": {
+    "classificationType": "functional",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "functional-classification:generic:level8:code"
+  },
   "geo-source:generic:code": {
     "dataType": "string", 
     "dimensionType": "location", 

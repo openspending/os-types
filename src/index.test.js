@@ -3,9 +3,13 @@
 import {expect} from 'chai';
 import TypeProcessor from './index';
 import _ from 'lodash';
+import JTS from 'jsontableschema';
+var osTypes = require('./os-types.json');
+var osTypeDescriptions = require('./os-type-descriptions.json');
 
 describe('os-types', function() {
   var tp = new TypeProcessor();
+
   describe('getAllTypes', function () {
     it('should be an array of strings', function () {
       expect(tp.getAllTypes()).to.satisfy(isArrayOfStrings);
@@ -96,11 +100,13 @@ describe('os-types', function() {
         [['hello-world', 'hello_world']],
         [['hello world', 'hello_world']],
         [['héllô₪wörld', 'hello_world']],
-        [['שלום עולם', 'ctvty_gnrc_prgrm_cd']],
-        [['שלום עולם', 'ctvty_gnrc_prgrm_cd'], ['אכלת פלפל', 'ctvty_gnrc_prjct_cd'], ['שתה מיץ', 'ctvty_gnrc_cntrct_cd']],
-        [['שלום עולם', 'ctvty_gnrc_prgrm_cd'],
-          ['ctvty_gnrc_prgrm_cd', 'ctvty_gnrc_prgrm_cd_2'],
-          ['ctvty_gnrc_prgrm_cd_2', 'ctvty_gnrc_prgrm_cd_2_2']]
+        [['שלום עולם', 'activity_generic_program_code']],
+        [['שלום עולם', 'activity_generic_program_code'],
+          ['אכלת פלפל', 'activity_generic_project_code'],
+          ['שתה מיץ', 'activity_generic_contract_code']],
+        [['שלום עולם', 'activity_generic_program_code'],
+          ['activity_generic_program_code', 'activity_generic_program_code_2'],
+          ['activity_generic_program_code_2', 'activity_generic_program_code_2_2']]
       ];
       var types = [
         'activity:generic:program:code',
@@ -122,9 +128,9 @@ describe('os-types', function() {
     });
     it('prevents correctly ducplicates', function () {
       var title_pairs = [
-        [['אבא', 'ctvty_gnrc_prgrm_cd'],
-          ['אמא', 'ctvty_gnrc_prgrm_cd_2'],
-          ['במבה', 'ctvty_gnrc_prgrm_cd_3']]
+        [['אבא', 'activity_generic_program_code'],
+          ['אמא', 'activity_generic_program_code_2'],
+          ['במבה', 'activity_generic_program_code_3']]
       ];
       var types = [
         'activity:generic:program:code',
@@ -142,6 +148,46 @@ describe('os-types', function() {
         titles.forEach((pair) => {
           expect(schema.fields[pair[0]].slug).to.equal(pair[1]);
         });
+      });
+    });
+    it('detects bad data samples and raises proper errors', function() {
+      var cases = [
+        ['value', {}, ['abcz'], true],
+        ['value', {}, ['123', 'abcz'], true],
+        ['value', {}, ['abcz', '123'], true],
+        ['value', {}, ['123'], false],
+        ['value', {}, ['12.3'], false],
+        ['value', {}, ['12.3'], false],
+        ['value', {}, ['12.3'], false],
+        ['date:generic', {}, ['1978-12-31'], false],
+        ['date:generic', {format:'fmt:YYYY/MM/DD'}, ['1978-12-31'], true],
+        ['date:generic', {format:'fmt:YYYY/MM/DD'}, ['1978/12/31'], false],
+        ['value', {}, ['1,234'], false],
+        ['value', {}, ['1,234.56'], false],
+        ['value', { groupChar:' ', decimalChar:','}, ['1 234,56'], false],
+      ];
+      _.forEach(cases, (_case) => {
+        var fields = [
+          {
+            name: 'dummy',
+            type: _case[0],
+            options: _case[1],
+            data: _case[2]
+          }
+        ];
+        var model = tp.fieldsToModel(fields);
+        expect(model).to.be.ok;
+        if ( _case[3] ) {
+          expect(model.errors).to.be.ok;
+          expect(model.errors.perField).to.be.ok;
+          expect(model.errors.perField.dummy).to.be.ok;
+          expect(model.errors.perField.dummy).to.match(/^Data cannot be cast to this type/);
+        } else {
+          if (model.errors) {
+            console.log(model.errors);
+          }
+          expect(model.errors).to.not.be.ok;
+        }
       });
     });
     it('creates correctly dimensions & measures', function () {
@@ -229,7 +275,7 @@ describe('os-types', function() {
           phase: 'pha'
         }, resource: 'res1'},
         {type: 'date:generic', name: 'transaction_date', resource: 'res2', options: {
-          format: 'fmt:12345'
+          format: '12345'
         }}
       ];
       var ret = tp.fieldsToModel(fields);
@@ -257,7 +303,7 @@ describe('os-types', function() {
               factor: 12
           }, resource: 'res1'},
           {type: 'date:generic', name: 'transaction_date', resource: 'res2', options: {
-              format: 'fmt:12345'
+              format: '12345'
           }}
       ];
       var ret = tp.fieldsToModel(fields);
@@ -272,4 +318,82 @@ describe('os-types', function() {
       expect(schema.fields.measure.groupChar).to.be.equal(',');;
     });
   });
+
+  describe('os-types definition', function() {
+    it('should contain only JTS valid types', function() {
+      _.forEach(osTypes, function(osTypeValue, osType) {
+        var dataType = null;
+        _.forEach(JTS.types, function(JTSTypeValue, JTSType) {
+          if (_.endsWith(JTSType, 'Type') ) {
+            var JTSObj = new JTSTypeValue();
+            if (JTSObj.name === osTypeValue.dataType) {
+              dataType = osTypeValue.dataType;
+            }
+          }
+        });
+        expect(dataType).to.not.be.null;
+      });
+    });
+
+    it('should have a description and name for all types', function() {
+      _.forEach(osTypes, function(osTypeValue, osType) {
+        var parts = osType.split(':');
+        var prefix = ''
+        for ( var i = 0 ; i < parts.length ; i++ ) {
+          prefix += parts[i];
+          if ( i != parts.length - 1 ) {
+            prefix += ':';
+          }
+          var description = osTypeDescriptions[prefix];
+          if (!description || !description.displayName || !description.description) {
+            console.log('MISSING DESCRIPTION FOR '+prefix, description);
+          }
+          expect(description).to.be.ok;
+          expect(description.displayName).to.be.ok;
+          expect(description.description).to.be.ok;
+        }
+      });
+    });
+
+    it('should have a type and name for all descriptions', function() {
+      _.forEach(osTypeDescriptions, function(osTypeDescription, osType) {
+        var prefix = _.some(_.map(_.keys(osTypes), function(key) {
+          return _.startsWith(key, osType);
+        }));
+        if (!prefix) {
+          console.log('MISSING TYPE FOR', osType);
+        }
+        expect(prefix).to.be.true;
+      });
+    });
+
+    it('should order correcly ', function () {
+      var fields = [
+        {type: 'administrative-classification:generic:level4:code:part', name: 'lvl4-code'},
+        {type: 'administrative-classification:generic:level3:code:part', name: 'lvl3-code'},
+        {type: 'administrative-classification:generic:level7:code:part', name: 'lvl7-code'},
+        {type: 'administrative-classification:generic:level2:code:part', name: 'lvl2-code'},
+        {type: 'administrative-classification:generic:level1:code:part', name: 'lvl1-code'},
+        {type: 'administrative-classification:generic:level6:code:part', name: 'lvl6-code'},
+        {type: 'administrative-classification:generic:level5:code:part', name: 'lvl5-code'}
+      ];
+      var ret = tp.fieldsToModel(fields);
+      expect(ret).to.not.equal(null);
+      var model = ret.model;
+      var schema = ret.schema.fields;
+      expect(model).to.be.ok;
+      expect(model.dimensions).to.be.ok;
+      expect(model.dimensions['administrative-classification'].primaryKey).to.eql([
+        'lvl1_code',
+        'lvl2_code',
+        'lvl3_code',
+        'lvl4_code',
+        'lvl5_code',
+        'lvl6_code',
+        'lvl7_code'
+      ])
+    });
+
+  });
+
 });

@@ -5,7 +5,7 @@
   "scripts": {
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "babel src/index.js -o dist/index.js && babel src/extra-options.js -o dist/extra-options.js",
-    "postbuild": "cp src/os-types.json dist/",
+    "postbuild": "cp src/*.json dist/",
     "commit": "git-cz",
     "check-coverage": "istanbul check-coverage --statements 90 --branches 90 --functions 90 --lines 90",
     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/openspending/os-types#readme",
   "dependencies": {
+    "jsontableschema": "git+https://github.com/frictionlessdata/jsontableschema-js.git",
     "lodash": "4.10.0",
     "lodash-addons": "^0.3.1"
   },
