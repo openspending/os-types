@@ -104,24 +104,20 @@ class TypeProcessor {
                     this._fieldError(f.name, "Got unknown options key "+diff);
             });
         // ... and data samples match the selected datatype ...
-        valid = valid &&
-            _.every(_.map(fields, (f) => {
-                if ( !f.type ) { return true; }
-                if ( f.data ) {
-                    var options = _.pick(f.options,
-                      _.map(
-                        _.get(extraOptions, 'dataTypes.'+this.types[f.type].dataType+'.options', []),
-                        'name')
-                    );
-                    var jtsType = this._getJTSTypeByName(this.types[f.type].dataType, options);
-                    return _.every(f.data, (datum) => {
-                        return jtsType.cast(datum) ||
-                          this._fieldError(f.name, "Data cannot be cast to this type '"+datum+"'");
-                    });
-                } else {
-                    return true;
-                }
-            }));
+        _.forEach(fields, (f) => {
+            if ( f.type && f.data ) {
+                var options = _.pick(f.options,
+                  _.map(
+                    _.get(extraOptions, 'dataTypes.'+this.types[f.type].dataType+'.options', []),
+                    'name')
+                );
+                var jtsType = this._getJTSTypeByName(this.types[f.type].dataType, options);
+                _.every(f.data, (datum) => {
+                    return jtsType.cast(datum) ||
+                      this._fieldError(f.name, "Data cannot be cast to this type '"+datum+"'");
+                });
+            }
+        });
         return valid;
     }
 
@@ -320,6 +316,9 @@ class TypeProcessor {
         });
 
         var fdp = {model, schema};
+        if (this.errors.general.length || _.keys(this.errors.perField).length) {
+            fdp.errors = this.errors;
+        }
         //console.log(JSON.stringify(fdp,null,2));
         return fdp;
     }
