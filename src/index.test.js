@@ -31,7 +31,12 @@ describe('os-types', function() {
       var allPrefixes = _.uniq(_.map(tp.getAllTypes(), (typ) => {
         return typ.split(':')[0] + (_.includes(typ, ':') ? ':' : '');
       }));
-      expect(tp.autoComplete('')).to.eql(allPrefixes);
+      var complete = tp.autoComplete('');
+      expect(_.keys(complete)).to.eql(allPrefixes);
+      _.forEach(_.values(complete), (v) => {
+        expect(v.displayName).to.be.ok;
+        expect(v.description).to.be.ok;
+      });
     });
     it('autocompletes a simple string', function () {
       var allPrefixes =
@@ -42,7 +47,12 @@ describe('os-types', function() {
             }), (typ) => {
               return typ.split(':')[0] + (_.includes(typ, ':') ? ':' : '');
             }));
-      expect(tp.autoComplete('a')).to.eql(allPrefixes);
+      var complete = tp.autoComplete('a');
+      expect(_.keys(complete)).to.eql(allPrefixes);
+      _.forEach(_.values(complete), (v) => {
+        expect(v.displayName).to.be.ok;
+        expect(v.description).to.be.ok;
+      });
     });
     it('autocompletes a simple : ending string', function () {
       var allPrefixes =
@@ -53,17 +63,32 @@ describe('os-types', function() {
             }), (typ) => {
               return 'functional-classification:' + typ.split(':')[1] + (_.includes(typ, ':') ? ':' : '');
             }));
-      expect(tp.autoComplete('functional-classification:')).to.eql(allPrefixes);
+      var complete = tp.autoComplete('functional-classification:');
+      expect(_.keys(complete)).to.eql(allPrefixes);
+      _.forEach(_.values(complete), (v) => {
+        expect(v.displayName).to.be.ok;
+        expect(v.description).to.be.ok;
+      });
     });
     it('autocompletes a complex non : ending string', function () {
-      expect(tp.autoComplete('functional-classification:co'))
+      var complete = tp.autoComplete('functional-classification:co');
+      expect(_.keys(complete))
         .to.eql(['functional-classification:cofog:']);
+      _.forEach(_.values(complete), (v) => {
+        expect(v.displayName).to.be.ok;
+        expect(v.description).to.be.ok;
+      });
     });
     it('autocompletes with leaves and non leaves', function () {
-      expect(tp.autoComplete('functional-classification:cofog:group:'))
+      var complete = tp.autoComplete('functional-classification:cofog:group:');
+      expect(_.keys(complete))
         .to.eql(['functional-classification:cofog:group:code:',
         'functional-classification:cofog:group:description',
         'functional-classification:cofog:group:label']);
+      _.forEach(_.values(complete), (v) => {
+        expect(v.displayName).to.be.ok;
+        expect(v.description).to.be.ok;
+      });
     });
   });
 

@@ -1,5 +1,6 @@
 'use strict';
 var os_types = require('./os-types.json');
+var os_type_descriptions = require('./os-type-descriptions.json');
 var extraOptions = require('./extra-options.js');
 var _ = require('lodash-addons');
 var JTS = require('jsontableschema').types;
@@ -38,7 +39,9 @@ class TypeProcessor {
             }
             return ret;
         });
-        return _.uniq(options);
+        return _.fromPairs(_.map(_.uniq(options), (k) => {
+            return [k, os_type_descriptions[k]];
+        }));
     }
 
     _getJTSTypeByName(name, options) {
