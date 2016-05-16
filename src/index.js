@@ -9,6 +9,7 @@ class TypeProcessor {
 
     constructor() {
         this.types = os_types;
+        this.ident = x => { return x; }
     }
 
     getAllTypes() {
@@ -106,11 +107,14 @@ class TypeProcessor {
         // ... and data samples match the selected datatype ...
         _.forEach(fields, (f) => {
             if ( f.type && f.data ) {
+                var typeOptions = _.get(extraOptions, 'dataTypes.'+this.types[f.type].dataType+'.options', []);
+                typeOptions = _.keyBy(typeOptions, 'name');
                 var options = _.pick(f.options,
-                  _.map(
-                    _.get(extraOptions, 'dataTypes.'+this.types[f.type].dataType+'.options', []),
-                    'name')
+                  _.keys(typeOptions)
                 );
+                options = _.mapValues(options, (value, key) => {
+                    return (typeOptions[key].transform || this.ident)(value);
+                });
                 var jtsType = this._getJTSTypeByName(this.types[f.type].dataType, options);
                 _.every(f.data, (datum) => {
                     return jtsType.cast(datum) ||
@@ -165,7 +169,7 @@ class TypeProcessor {
     _embedOptions(target, options, availableOptions) {
         _.forEach(availableOptions, (availableOption) => {
             var n = availableOption.name;
-            var transform = availableOption.transform || (x => { return x; });
+            var transform = availableOption.transform || this.ident;
             if (_.hasIn(options, n) && options[n]) {
                 target[n] = transform(options[n]);
             } else if (_.hasIn(availableOption, 'defaultValue')) {

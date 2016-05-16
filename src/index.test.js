@@ -185,8 +185,8 @@ describe('os-types', function() {
         ['value', {}, ['12.3'], false],
         ['value', {}, ['12.3'], false],
         ['date:generic', {}, ['1978-12-31'], false],
-        ['date:generic', {format:'fmt:YYYY/MM/DD'}, ['1978-12-31'], true],
-        ['date:generic', {format:'fmt:YYYY/MM/DD'}, ['1978/12/31'], false],
+        ['date:generic', {format:'%Y/%m/%d'}, ['1978-12-31'], true],
+        ['date:generic', {format:'%Y/%m/%d'}, ['1978/12/31'], false],
         ['value', {}, ['1,234'], false],
         ['value', {}, ['1,234.56'], false],
         ['value', { groupChar:' ', decimalChar:','}, ['1 234,56'], false],
@@ -211,6 +211,7 @@ describe('os-types', function() {
         } else {
           if (model.errors) {
             console.log(model.errors);
+            console.log(_case);
           }
           expect(model.errors).to.not.be.ok;
         }
@@ -226,8 +227,8 @@ describe('os-types', function() {
         ['value', {}, ['12.3'], false],
         ['value', {}, ['12.3'], false],
         ['date:generic', {}, ['1978-12-31'], false],
-        ['date:generic', {format:'fmt:YYYY/MM/DD'}, ['1978-12-31'], true],
-        ['date:generic', {format:'fmt:YYYY/MM/DD'}, ['1978/12/31'], false],
+        ['date:generic', {format:'%Y/%m/%d'}, ['1978-12-31'], true],
+        ['date:generic', {format:'%Y/%m/%d'}, ['1978/12/31'], false],
         ['value', {}, ['1,234'], false],
         ['value', {}, ['1,234.56'], false],
         ['value', { groupChar:' ', decimalChar:','}, ['1 234,56'], false],

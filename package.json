@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/openspending/os-types#readme",
   "dependencies": {
-    "jsontableschema": "git+https://github.com/frictionlessdata/jsontableschema-js.git",
+    "jsontableschema": "git+http://github.com/akariv/jsontableschema-js#fix/use-correct-date-format",
     "lodash": "4.10.0",
     "lodash-addons": "^0.3.1"
   },
