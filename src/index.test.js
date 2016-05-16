@@ -190,6 +190,7 @@ describe('os-types', function() {
         ['value', {}, ['1,234'], false],
         ['value', {}, ['1,234.56'], false],
         ['value', { groupChar:' ', decimalChar:','}, ['1 234,56'], false],
+        ['', {}, ['100'], false],
       ];
       _.forEach(cases, (_case) => {
         var fields = [
