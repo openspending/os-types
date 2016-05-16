@@ -19,7 +19,6 @@ module.exports =
           name: 'direction',
           title: 'Direction',
           values: [
-            {name: '', value: ''},
             {name: 'Expenditure', value: 'expenditure'},
             {name: 'Revenue', value: 'revenue'}
           ]
@@ -28,7 +27,6 @@ module.exports =
           name: 'phase',
           title: 'Phase',
           values: [
-            {name: '', value: ''},
             {name: 'Proposed', value: 'proposed'},
             {name: 'Approved', value: 'approved'},
             {name: 'Adjusted', value: 'adjusted'},
@@ -68,7 +66,7 @@ module.exports =
         {
           name: 'format',
           title: 'Format',
-          defaultValue: '%H:%M:%SZ',
+          defaultValue: '%H:%M:%S',
           transform: (f) => {
             return 'fmt:'+f;
           }
@@ -80,12 +78,14 @@ module.exports =
         {
           name: 'decimalChar',
           title: 'Decimal Separator',
-          defaultValue: '.'
+          defaultValue: '.',
+          trim: "false"
         },
         {
           name: 'groupChar',
           title: 'Grouping Character',
-          defaultValue: ','
+          defaultValue: ',',
+          trim: "false"
         }
       ]
     }

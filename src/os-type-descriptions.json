@@ -38,10 +38,22 @@
   "activity:generic:project:code": {
     "displayName": "Unique Identifier",
     "description": "A code or unique identifier for the project"
-  }, 
+  },
   "activity:generic:project:label": {
     "displayName": "Display Name",
     "description": "A label, title or display name for this project"
+  },
+  "activity:generic:subproject:": {
+    "displayName": "Sub-Project",
+    "description": "The sub-project that's being funded or related to the spending line"
+  },
+  "activity:generic:subproject:code": {
+    "displayName": "Unique Identifier",
+    "description": "A code or unique identifier for the sub-project"
+  },
+  "activity:generic:subproject:label": {
+    "displayName": "Display Name",
+    "description": "A label, title or display name for this sub-project"
   },
   "administrative-classification:": {
     "displayName": "Administrative Classification",
@@ -260,7 +272,7 @@
     "description": "The body that is authorized to spend the money"
   },
   "administrator:generic:": {
-    "displayName": "Generic Administrator",
+    "displayName": "Non-standard Administrator",
     "description": "Administrator identifiers or labels that do not adhere to a specific standard"
   },
   "administrator:generic:id": {
@@ -936,7 +948,7 @@
     "description": "The government entity acting as procurer for the transaction"
   },
   "procurer:generic:": {
-    "displayName": "Generic Procurer",
+    "displayName": "Non-standard Procurer",
     "description": "Procurer identifiers or labels that do not adhere to a specific standard"
   },
   "procurer:generic:id": {
@@ -952,7 +964,7 @@
     "description": "The recipient targeted by the transaction"
   },
   "recipient:generic:": {
-    "displayName": "Generic Recipient",
+    "displayName": "Non-standard Recipient",
     "description": "Recipient identifiers or labels that do not adhere to a specific standard"
   },
   "recipient:generic:id": {
@@ -968,7 +980,7 @@
     "description": "The supplier for a procurement or other goods"
   },
   "supplier:generic:": {
-    "displayName": "Generic Supplier",
+    "displayName": "Non-standard Supplier",
     "description": "Supplier identifiers or labels that do not adhere to a specific standard"
   },
   "supplier:generic:id": {
@@ -982,5 +994,77 @@
   "value": {
     "displayName": "Amount",
     "description": "Numeric value depicting a fiscal amount related to the budget item, spending transaction etc."
+  },
+  "fin-source:": {
+    "displayName": "Financial Source",
+    "description": "The Financial source for budgetary funds"
+  },
+  "fin-source:generic:": {
+    "displayName": "Non-standard Financial Source",
+    "description": "Identifiers and labels for financial sources which do not adhere to a specific standard"
+  },
+  "fin-source:generic:code": {
+    "displayName": "Unique Identifier",
+    "description": "A code or unique identifier for the financial source"
+  },
+  "fin-source:generic:label": {
+    "displayName": "Display Name",
+    "description": "Display name or title for the financial source"
+  },
+  "fin-source:generic:level1:": {
+    "displayName": "Top Level for a hierarchical financial source",
+    "description": "Identifiers and labels for the top level of the financial source hierarchy"
+  },
+  "fin-source:generic:level1:code": {
+    "displayName": "Unique Identifier",
+    "description": "A code or unique identifier for the top level of the financial source hierarchy"
+  },
+  "fin-source:generic:level1:label": {
+    "displayName": "Display Name",
+    "description": "Display name or title for the top level of the financial source hierarchy"
+  },
+  "fin-source:generic:level2:": {
+    "displayName": "2nd Level for a hierarchical financial source",
+    "description": "Identifiers and labels for the 2nd level of the financial source hierarchy"
+  },
+  "fin-source:generic:level2:code": {
+    "displayName": "Unique Identifier",
+    "description": "A code or unique identifier for the 2nd level of the financial source hierarchy"
+  },
+  "fin-source:generic:level2:label": {
+    "displayName": "Display Name",
+    "description": "Display name or title for the 2nd level of the financial source hierarchy"
+  },
+  "expenditure-type": {
+    "displayName": "Expenditure Type",
+    "description": "Extra attributes providing more properties regarding the expenditure"
+  },
+  "budgetary-transfers": {
+    "displayName": "Budgetary Transfers",
+    "description": "Extra properties regarding whether the expenditure contains budgetary transfers"
+  },
+  "unknown:": {
+    "displayName": "Unknown Mapping",
+    "description": "Use when no other data type applies to the column"
+  },
+  "unknown:string": {
+    "displayName": "Unknown Mapping - String",
+    "description": "An unknown string column with no mapping"
+  },
+  "unknown:date": {
+    "displayName": "Unknown Mapping - Date",
+    "description": "An unknown date column with no mapping"
+  },
+  "unknown:time": {
+    "displayName": "Unknown Mapping - Date/Time",
+    "description": "An unknown date/time column with no mapping"
+  },
+  "unknown:datetime": {
+    "displayName": "Unknown Mapping - Time",
+    "description": "An unknown time column with no mapping"
+  },
+  "unknown:number": {
+    "displayName": "Unknown Mapping - Number",
+    "description": "An unknown numeric column with no mapping"
   }
 }

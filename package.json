@@ -10,7 +10,7 @@
     "check-coverage": "istanbul check-coverage --statements 90 --branches 90 --functions 90 --lines 90",
     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "start": "npm run test",
-    "test": "mocha src/index.test.js -w --compilers js:babel/register",
+    "test": "mocha src/index.test.js -w --watch-extensions json --compilers js:babel/register",
     "test:single": "cp src/index.test.js dist/ && istanbul cover -x *.test.js _mocha -- -R spec dist/index.test.js --compilers js:babel/register && rm dist/index.test.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },

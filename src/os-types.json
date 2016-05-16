@@ -19,18 +19,29 @@
     "dataType": "string", 
     "dimensionType": "activity", 
     "labelfor": "activity:generic:program:code"
-  }, 
+  },
   "activity:generic:project:code": {
-    "dataType": "string", 
-    "dimensionType": "activity", 
-    "parent": "activity:generic:program:code", 
+    "dataType": "string",
+    "dimensionType": "activity",
+    "parent": "activity:generic:program:code",
     "uniqueIdentifier": true
-  }, 
+  },
   "activity:generic:project:label": {
-    "dataType": "string", 
-    "dimensionType": "activity", 
+    "dataType": "string",
+    "dimensionType": "activity",
     "labelfor": "activity:generic:project:code"
-  }, 
+  },
+  "activity:generic:subproject:code": {
+    "dataType": "string",
+    "dimensionType": "activity",
+    "parent": "activity:generic:project:code",
+    "uniqueIdentifier": true
+  },
+  "activity:generic:subproject:label": {
+    "dataType": "string",
+    "dimensionType": "activity",
+    "labelfor": "activity:generic:subproject:code"
+  },
   "administrative-classification:generic:code": {
     "classificationType": "administrative", 
     "dataType": "string", 
@@ -948,6 +959,61 @@
     "dimensionType": "entity"
   }, 
   "value": {
+    "dataType": "number"
+  },
+  "fin-source:generic:code": {
+    "dimensionType": "other",
+    "dataType": "string"
+  },
+  "fin-source:generic:label": {
+    "dataType": "string",
+    "dimensionType": "other",
+    "labelfor": "fin-source:generic:code"
+  },
+  "fin-source:generic:level1:code": {
+    "dimensionType": "other",
+    "dataType": "string"
+  },
+  "fin-source:generic:level1:label": {
+    "dataType": "string",
+    "dimensionType": "other",
+    "labelfor": "fin-source:generic:level1:code"
+  },
+  "fin-source:generic:level2:code": {
+    "dimensionType": "other",
+    "dataType": "string"
+  },
+  "fin-source:generic:level2:label": {
+    "dimensionType": "other",
+    "dataType": "string",
+    "labelfor": "fin-source:generic:level1:code"
+  },
+  "expenditure-type": {
+    "dimensionType": "other",
+    "dataType": "string"
+  },
+  "budgetary-transfers": {
+    "dimensionType": "other",
+    "dataType": "string"
+  },
+  "unknown:string": {
+    "dimensionType": "other",
+    "dataType": "string"
+  },
+  "unknown:date": {
+    "dimensionType": "other",
+    "dataType": "date"
+  },
+  "unknown:time": {
+    "dimensionType": "other",
+    "dataType": "time"
+  },
+  "unknown:datetime": {
+    "dimensionType": "other",
+    "dataType": "datetime"
+  },
+  "unknown:number": {
+    "dimensionType": "other",
     "dataType": "number"
   }
 }
