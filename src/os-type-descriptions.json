@@ -1056,11 +1056,11 @@
     "description": "An unknown date column with no mapping"
   },
   "unknown:time": {
-    "displayName": "Unknown Mapping - Date/Time",
+    "displayName": "Unknown Mapping - Time",
     "description": "An unknown date/time column with no mapping"
   },
   "unknown:datetime": {
-    "displayName": "Unknown Mapping - Time",
+    "displayName": "Unknown Mapping - Date/Time",
     "description": "An unknown time column with no mapping"
   },
   "unknown:number": {
