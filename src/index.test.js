@@ -216,6 +216,46 @@ describe('os-types', function() {
         }
       });
     });
+    it('detects bad data samples and raises proper errors for multiple fields', function() {
+      var cases = [
+        ['value', {}, ['abcz'], true],
+        ['value', {}, ['123', 'abcz'], true],
+        ['value', {}, ['abcz', '123'], true],
+        ['value', {}, ['123'], false],
+        ['value', {}, ['12.3'], false],
+        ['value', {}, ['12.3'], false],
+        ['value', {}, ['12.3'], false],
+        ['date:generic', {}, ['1978-12-31'], false],
+        ['date:generic', {format:'fmt:YYYY/MM/DD'}, ['1978-12-31'], true],
+        ['date:generic', {format:'fmt:YYYY/MM/DD'}, ['1978/12/31'], false],
+        ['value', {}, ['1,234'], false],
+        ['value', {}, ['1,234.56'], false],
+        ['value', { groupChar:' ', decimalChar:','}, ['1 234,56'], false],
+        ['', {}, ['100'], false],
+      ];
+      var fields = [
+        {
+          name: 'dummy1',
+          type: 'value',
+          options: {},
+          data: ['123','fsdsd','456']
+        },
+        {
+          name: 'dummy2',
+          type: 'date:fiscal-year',
+          options: {},
+          data: ['2012','2013','xxx']
+        }
+      ];
+      var model = tp.fieldsToModel(fields);
+      expect(model).to.be.ok;
+      expect(model.errors).to.be.ok;
+      expect(model.errors.perField).to.be.ok;
+      expect(model.errors.perField.dummy1).to.be.ok;
+      expect(model.errors.perField.dummy1).to.match(/^Data cannot be cast to this type/);
+      expect(model.errors.perField.dummy2).to.be.ok;
+      expect(model.errors.perField.dummy2).to.match(/^Data cannot be cast to this type/);
+    });
     it('creates correctly dimensions & measures', function () {
       var fields = _.map(tp.getAllTypes(), (type) => {
         var name = type.replace(/:/g, ' ');

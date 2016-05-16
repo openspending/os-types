@@ -105,7 +105,7 @@ class TypeProcessor {
             });
         // ... and data samples match the selected datatype ...
         valid = valid &&
-            _.every(fields, (f) => {
+            _.every(_.map(fields, (f) => {
                 if ( !f.type ) { return true; }
                 if ( f.data ) {
                     var options = _.pick(f.options,
@@ -121,7 +121,7 @@ class TypeProcessor {
                 } else {
                     return true;
                 }
-            });
+            }));
         return valid;
     }
 
