@@ -40,9 +40,20 @@ class TypeProcessor {
             }
             return ret;
         });
-        return _.fromPairs(_.map(_.uniq(options), (k) => {
-            return [k, os_type_descriptions[k]];
-        }));
+        options = _.map(_.uniq(options), (k) => {
+            return _.extend({type:k}, os_type_descriptions[k]);
+        });
+        options = _.sortBy(options, 'type');
+        options = _.sortBy(options, 'group');
+        var group = null;
+        _.forEach(options, (option) => {
+            if (option.group == group) {
+               delete option.group;
+            } else {
+               group = option.group;
+            }
+        });
+        return options;
     }
 
     _getJTSTypeByName(name, options) {

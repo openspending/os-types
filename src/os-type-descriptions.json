@@ -1,7 +1,8 @@
 {
   "activity:": {
     "displayName": "Activity",
-    "description": "The activity that's being funded (e.g. project, program, contract etc.)"
+    "description": "The activity that's being funded (e.g. project, program, contract etc.)",
+    "group": "300-Activity"
   },
   "activity:generic:": {
     "displayName": "Non-standard Activity",
@@ -57,7 +58,8 @@
   },
   "administrative-classification:": {
     "displayName": "Administrative Classification",
-    "description": "The entity responsible for managing the public funds"
+    "description": "The entity responsible for managing the public funds",
+    "group": "200-Classifications"
   },
   "administrative-classification:generic:": {
     "displayName": "Non-standard Administrative Classification",
@@ -269,7 +271,8 @@
   },
   "administrator:": {
     "displayName": "Administrator",
-    "description": "The body that is authorized to spend the money"
+    "description": "The body that is authorized to spend the money",
+    "group": "400-Participating Entities"
   },
   "administrator:generic:": {
     "displayName": "Non-standard Administrator",
@@ -285,11 +288,13 @@
   },
   "budget-line-id": {
     "displayName": "Budget Line Identifier",
-    "description": "A unique identifier for this budget line"
+    "description": "A unique identifier for this budget line",
+    "group": "700-Identifiers"
   },
   "date:": {
     "displayName": "Date",
-    "description": "Date related data types"
+    "description": "Date related data types",
+    "group": "100-Time"
   },
   "date:fiscal-year": {
     "displayName": "Fiscal year",
@@ -301,11 +306,13 @@
   },
   "direction": {
     "displayName": "Budget Direction",
-    "description": "Specifies whether the values in this line are expenditure or revenues"
+    "description": "Specifies whether the values in this line are expenditure or revenues",
+    "group": "500-Fiscal Attributes"
   },
   "economic-classification:": {
     "displayName": "Economic Classification",
-    "description": "The type of budget and expenditure incurred (e.g.salaries, goods and services, interest payments, or capital spending etc.)"
+    "description": "The type of budget and expenditure incurred (e.g.salaries, goods and services, interest payments, or capital spending etc.)",
+    "group": "200-Classifications"
   },
   "economic-classification:generic:": {
     "displayName": "Non-standard Economic Classification",
@@ -673,7 +680,8 @@
   },
   "functional-classification:": {
     "displayName": "Functional Classification",
-    "description": "Classification of expenditure according to the purposes and objectives for which they are intended"
+    "description": "Classification of expenditure according to the purposes and objectives for which they are intended",
+    "group": "200-Classifications"
   },
   "functional-classification:generic:": {
     "displayName": "Non-standard Functional Classification",
@@ -885,7 +893,8 @@
   },
   "geo-source:": {
     "displayName": "Geographic information",
-    "description": "Geographic information related to the record (e.g. related city, region etc.)"
+    "description": "Geographic information related to the record (e.g. related city, region etc.)",
+    "group": "600-Geographic"
   },
   "geo-source:generic:": {
     "displayName": "Other Geographic information",
@@ -937,15 +946,18 @@
   },
   "invoice-id": {
     "displayName": "Invoice Identifier",
-    "description": "A unique identifier for this invoice"
+    "description": "A unique identifier for this invoice",
+    "group": "700-Identifiers"
   },
   "phase": {
     "displayName": "Budget Life-cycle Phase",
-    "description": "The phase identifier for the values in this line (e.g. approved, executed etc.)"
+    "description": "The phase identifier for the values in this line (e.g. approved, executed etc.)",
+    "group": "500-Fiscal Attributes"
   },
   "procurer:": {
     "displayName": "Procurer",
-    "description": "The government entity acting as procurer for the transaction"
+    "description": "The government entity acting as procurer for the transaction",
+    "group": "400-Participating Entities"
   },
   "procurer:generic:": {
     "displayName": "Non-standard Procurer",
@@ -961,7 +973,8 @@
   },
   "recipient:": {
     "displayName": "Recipient",
-    "description": "The recipient targeted by the transaction"
+    "description": "The recipient targeted by the transaction",
+    "group": "400-Participating Entities"
   },
   "recipient:generic:": {
     "displayName": "Non-standard Recipient",
@@ -977,7 +990,8 @@
   },
   "supplier:": {
     "displayName": "Supplier",
-    "description": "The supplier for a procurement or other goods"
+    "description": "The supplier for a procurement or other goods",
+    "group": "400-Participating Entities"
   },
   "supplier:generic:": {
     "displayName": "Non-standard Supplier",
@@ -993,11 +1007,13 @@
   },
   "value": {
     "displayName": "Amount",
-    "description": "Numeric value depicting a fiscal amount related to the budget item, spending transaction etc."
+    "description": "Numeric value depicting a fiscal amount related to the budget item, spending transaction etc.",
+    "group": "800-Amount"
   },
   "fin-source:": {
     "displayName": "Financial Source",
-    "description": "The Financial source for budgetary funds"
+    "description": "The Financial source for budgetary funds",
+    "group": "500-Fiscal Attributes"
   },
   "fin-source:generic:": {
     "displayName": "Non-standard Financial Source",
@@ -1037,15 +1053,18 @@
   },
   "expenditure-type": {
     "displayName": "Expenditure Type",
-    "description": "Extra attributes providing more properties regarding the expenditure"
+    "description": "Extra attributes providing more properties regarding the expenditure",
+    "group": "500-Fiscal Attributes"
   },
   "budgetary-transfers": {
     "displayName": "Budgetary Transfers",
-    "description": "Extra properties regarding whether the expenditure contains budgetary transfers"
+    "description": "Extra properties regarding whether the expenditure contains budgetary transfers",
+    "group": "500-Fiscal Attributes"
   },
   "unknown:": {
     "displayName": "Unknown Mapping",
-    "description": "Use when no other data type applies to the column"
+    "description": "Use when no other data type applies to the column",
+    "group": "900-Other"
   },
   "unknown:string": {
     "displayName": "Unknown Mapping - String",
