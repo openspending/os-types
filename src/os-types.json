@@ -894,7 +894,6 @@
     "dataType": "string", 
     "dimensionType": "location",
     "labelfor": "geo-source:generic:code"
-
   }, 
   "geo-source:source:code": {
     "dataType": "string", 
