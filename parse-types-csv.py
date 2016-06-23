@@ -1,3 +1,9 @@
+""" Parse the CSV file.
+
+Do not use: modify the JSON file directly instead.
+
+"""
+
 import csv
 import json
 
