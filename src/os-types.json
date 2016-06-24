@@ -300,7 +300,8 @@
   "economic-classification:generic:label": {
     "classificationType": "economic", 
     "dataType": "string", 
-    "dimensionType": "classification"
+    "dimensionType": "classification",
+    "labelfor": "economic-classification:generic:code"
   }, 
   "economic-classification:generic:level1:code:full": {
     "classificationType": "economic", 
@@ -891,7 +892,8 @@
   }, 
   "geo-source:generic:title": {
     "dataType": "string", 
-    "dimensionType": "location"
+    "dimensionType": "location",
+    "labelfor": "geo-source:generic:code"
   }, 
   "geo-source:source:code": {
     "dataType": "string", 
@@ -905,8 +907,9 @@
   }, 
   "geo-source:source:title": {
     "dataType": "string", 
-    "dimensionType": "location"
-  }, 
+    "dimensionType": "location",
+    "labelfor": "geo-source:source:code"
+  },
   "geo-source:target:code": {
     "dataType": "string", 
     "dimensionType": "location", 
@@ -919,8 +922,9 @@
   }, 
   "geo-source:target:title": {
     "dataType": "string", 
-    "dimensionType": "location"
-  }, 
+    "dimensionType": "location",
+    "labelfor": "geo-source:target:code"
+  },
   "invoice-id": {
     "dataType": "string", 
     "dimensionType": "fact", 
