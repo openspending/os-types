@@ -288,12 +288,16 @@ class TypeProcessor {
                     var targetAttribute = findAttribute(null, labelfor);
                     if ( targetAttribute ) {
                         attribute.labelfor = targetAttribute.key;
+                    } else {
+                        this._fieldError(field.name, "Couldn't find a column mapped to the matching 'code' (%s)" % labelfor);
                     }
                 }
                 if ( parent ) {
                     var targetAttribute = findAttribute(null, parent);
                     if ( targetAttribute ) {
                         attribute.parent = targetAttribute.key;
+                    } else {
+                        this._fieldError(field.name, "Couldn't find a column mapped to the parent of this type (%s)'" % parent);
                     }
                 }
             }

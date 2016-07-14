@@ -313,6 +313,28 @@ describe('os-types', function() {
         .attributes[schema['lvl2-code'].slug].parent)
         .to.be.equal(schema['lvl1-code'].slug);
     });
+    it('detects missing labelfor relations', function () {
+      var fields = [
+        {type: 'administrative-classification:generic:level1:code:part', name: 'lvl1-code'},
+        {type: 'administrative-classification:generic:level1:label', name: 'lvl1-label'},
+        {type: 'administrative-classification:generic:level2:label', name: 'lvl2-label'}
+      ];
+      var ret = tp.fieldsToModel(fields);
+      expect(ret).to.not.equal(null);
+      expect(ret.errors).to.be.ok;
+      expect(ret.errors.perField['lvl2-label']).to.be.ok;
+    });
+    it('detects missing parent relations', function () {
+      var fields = [
+        {type: 'administrative-classification:generic:level1:label', name: 'lvl1-label'},
+        {type: 'administrative-classification:generic:level2:code:part', name: 'lvl2-code'},
+        {type: 'administrative-classification:generic:level2:label', name: 'lvl2-label'}
+      ];
+      var ret = tp.fieldsToModel(fields);
+      expect(ret).to.not.equal(null);
+      expect(ret.errors).to.be.ok;
+      expect(ret.errors.perField['lvl2-code']).to.be.ok;
+    });
     it('suggests correctly options for data types and measures', function () {
       var fields = [
         {type: 'value', name: 'measure'},
