@@ -289,7 +289,7 @@ class TypeProcessor {
                     if ( targetAttribute ) {
                         attribute.labelfor = targetAttribute.key;
                     } else {
-                        this._fieldError(field.name, "Couldn't find a column mapped to the matching 'code' (%s)" % labelfor);
+                        this._fieldError(field.name, "Couldn't find a column mapped to the matching 'code' ("+labelfor+")");
                     }
                 }
                 if ( parent ) {
@@ -297,7 +297,7 @@ class TypeProcessor {
                     if ( targetAttribute ) {
                         attribute.parent = targetAttribute.key;
                     } else {
-                        this._fieldError(field.name, "Couldn't find a column mapped to the parent of this type (%s)'" % parent);
+                        this._fieldError(field.name, "Couldn't find a column mapped to the parent of this type ("+parent+")");
                     }
                 }
             }

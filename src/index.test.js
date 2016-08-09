@@ -323,6 +323,7 @@ describe('os-types', function() {
       expect(ret).to.not.equal(null);
       expect(ret.errors).to.be.ok;
       expect(ret.errors.perField['lvl2-label']).to.be.ok;
+      expect(ret.errors.perField['lvl2-label'][0]).to.be.a('string');
     });
     it('detects missing parent relations', function () {
       var fields = [
@@ -334,6 +335,7 @@ describe('os-types', function() {
       expect(ret).to.not.equal(null);
       expect(ret.errors).to.be.ok;
       expect(ret.errors.perField['lvl2-code']).to.be.ok;
+      expect(ret.errors.perField['lvl2-code'][0]).to.be.a('string');
     });
     it('suggests correctly options for data types and measures', function () {
       var fields = [
