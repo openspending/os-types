@@ -94,6 +94,23 @@ class TypeProcessor {
                 return (diff.length == 0) ||
                     this._fieldError(f.name, "Got unknown properties "+diff);
             });
+        // ... and no duplicate names ...
+        valid = valid &&
+            _.chain(fields)
+             .countBy('name')
+             .toPairs()
+              .filter((pair) => { return pair[1] <= 1 || this._fieldError(pair[0], "Got duplicate name " + pair[0]); })
+             .value()
+             .length == fields.length;
+        // ... and no duplicate titles ...
+        valid = valid &&
+            _.chain(fields)
+             .filter((field) => !!field.title)
+             .countBy('title')
+             .toPairs()
+             .filter((pair) => { return !(pair[1] <= 1 || this._fieldError(pair[0], "Got duplicate title " + pair[0])); })
+             .value()
+             .length == 0;
         // ... and all types are valid ...
         valid = valid &&
             _.every(fields, (f) => {

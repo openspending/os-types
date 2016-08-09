@@ -417,6 +417,50 @@ describe('os-types', function() {
       expect(schema).to.be.ok;
       expect(schema.fields.measure.groupChar).to.be.equal(',');;
     });
+    it('should order correctly ', function () {
+      var fields = [
+        {type: 'administrative-classification:generic:level4:code:part', name: 'lvl4-code'},
+        {type: 'administrative-classification:generic:level3:code:part', name: 'lvl3-code'},
+        {type: 'administrative-classification:generic:level7:code:part', name: 'lvl7-code'},
+        {type: 'administrative-classification:generic:level2:code:part', name: 'lvl2-code'},
+        {type: 'administrative-classification:generic:level1:code:part', name: 'lvl1-code'},
+        {type: 'administrative-classification:generic:level6:code:part', name: 'lvl6-code'},
+        {type: 'administrative-classification:generic:level5:code:part', name: 'lvl5-code'}
+      ];
+      var ret = tp.fieldsToModel(fields);
+      expect(ret).to.not.equal(null);
+      var model = ret.model;
+      expect(model).to.be.ok;
+      expect(model.dimensions).to.be.ok;
+      expect(model.dimensions['administrative-classification'].primaryKey).to.eql([
+        'lvl1_code',
+        'lvl2_code',
+        'lvl3_code',
+        'lvl4_code',
+        'lvl5_code',
+        'lvl6_code',
+        'lvl7_code'
+      ])
+    });
+    it('should detect duplicate names or titles and generate errors', function () {
+      var fields = [
+        [
+          {type: 'administrative-classification:generic:level1:code:part', name: 'lvl1-code', title:'admin1'},
+          {type: 'administrative-classification:generic:level2:code:part', name: 'lvl1-code', title:'admin2'}
+        ],[
+          {type: 'administrative-classification:generic:level3:code:part', name: 'lvl2-code', title:'admin3'},
+          {type: 'administrative-classification:generic:level4:code:part', name: 'lvl3-code', title:'admin3'},
+        ],[
+          {type: 'administrative-classification:generic:level3:code:part', name: 'lvl4-code'},
+          {type: 'administrative-classification:generic:level4:code:part', name: 'lvl4-code'},
+        ]
+      ];
+      for (var fieldset of fields) {
+        var ret = tp.fieldsToModel(fieldset);
+        expect(ret).to.not.equal(null);
+        expect(ret.errors).to.be.ok;
+      }
+    });
   });
 
   describe('os-types definition', function() {
@@ -478,33 +522,6 @@ describe('os-types', function() {
         expect(prefix).to.be.true;
       });
     });
-
-    it('should order correctly ', function () {
-      var fields = [
-        {type: 'administrative-classification:generic:level4:code:part', name: 'lvl4-code'},
-        {type: 'administrative-classification:generic:level3:code:part', name: 'lvl3-code'},
-        {type: 'administrative-classification:generic:level7:code:part', name: 'lvl7-code'},
-        {type: 'administrative-classification:generic:level2:code:part', name: 'lvl2-code'},
-        {type: 'administrative-classification:generic:level1:code:part', name: 'lvl1-code'},
-        {type: 'administrative-classification:generic:level6:code:part', name: 'lvl6-code'},
-        {type: 'administrative-classification:generic:level5:code:part', name: 'lvl5-code'}
-      ];
-      var ret = tp.fieldsToModel(fields);
-      expect(ret).to.not.equal(null);
-      var model = ret.model;
-      expect(model).to.be.ok;
-      expect(model.dimensions).to.be.ok;
-      expect(model.dimensions['administrative-classification'].primaryKey).to.eql([
-        'lvl1_code',
-        'lvl2_code',
-        'lvl3_code',
-        'lvl4_code',
-        'lvl5_code',
-        'lvl6_code',
-        'lvl7_code'
-      ])
-    });
-
 
   });
 
