@@ -53,5 +53,8 @@
     "ghooks": {
       "pre-commit": "npm run test:single && npm run check-coverage"
     }
+  },
+  "bin": {
+    "os-types": "src/cli.js"
   }
 }
