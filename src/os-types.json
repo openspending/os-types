@@ -680,7 +680,8 @@
   "functional-classification:generic:label": {
     "classificationType": "functional", 
     "dataType": "string", 
-    "dimensionType": "classification"
+    "dimensionType": "classification",
+    "labelfor": "functional-classification:generic:code"
   }, 
   "functional-classification:generic:level1:code:full": {
     "classificationType": "functional", 
