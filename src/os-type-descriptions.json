@@ -1058,11 +1058,11 @@
   },
   "expenditure-type:code": {
     "displayName": "Unique Identifier",
-    "description": "Unique identifier for the expenditure type",
+    "description": "Unique identifier for the expenditure type"
   },
   "expenditure-type:label": {
     "displayName": "Display Name",
-    "description": "Display name for the expenditure type",
+    "description": "Display name for the expenditure type"
   },
   "budgetary-transfers": {
     "displayName": "Budgetary Transfers",
