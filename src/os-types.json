@@ -998,8 +998,8 @@
     "dataType": "string"
   },
   "expenditure-type:label": {
-    "dataType": "string",
     "dimensionType": "other",
+    "dataType": "string",
     "labelfor": "expenditure-type:code"
   },
   "budgetary-transfers": {

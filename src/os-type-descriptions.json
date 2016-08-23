@@ -1056,6 +1056,14 @@
     "description": "Extra attributes providing more properties regarding the expenditure",
     "group": "500-Fiscal Attributes"
   },
+  "expenditure-type:code": {
+    "displayName": "Unique Identifier",
+    "description": "Unique identifier for the expenditure type",
+  },
+  "expenditure-type:label": {
+    "displayName": "Display Name",
+    "description": "Display name for the expenditure type",
+  },
   "budgetary-transfers": {
     "displayName": "Budgetary Transfers",
     "description": "Extra properties regarding whether the expenditure contains budgetary transfers",
