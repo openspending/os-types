@@ -1051,7 +1051,7 @@
     "displayName": "Display Name",
     "description": "Display name or title for the 2nd level of the financial source hierarchy"
   },
-  "expenditure-type": {
+  "expenditure-type:": {
     "displayName": "Expenditure Type",
     "description": "Extra attributes providing more properties regarding the expenditure",
     "group": "500-Fiscal Attributes"
