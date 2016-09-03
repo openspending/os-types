@@ -359,4 +359,5 @@ class TypeProcessor {
         return fdp;
     }
 }
+
 module.exports = TypeProcessor;

@@ -993,9 +993,14 @@
     "dataType": "string",
     "labelfor": "fin-source:generic:level1:code"
   },
-  "expenditure-type": {
+  "expenditure-type:code": {
     "dimensionType": "other",
     "dataType": "string"
+  },
+  "expenditure-type:label": {
+    "dimensionType": "other",
+    "dataType": "string",
+    "labelfor": "expenditure-type:code"
   },
   "budgetary-transfers": {
     "dimensionType": "other",
