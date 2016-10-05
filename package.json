@@ -32,7 +32,8 @@
   "dependencies": {
     "jsontableschema": "git+http://github.com/akariv/jsontableschema-js#fix/handle-percent-signs",
     "lodash": "4.10.0",
-    "lodash-addons": "^0.3.1"
+    "lodash-addons": "^0.3.1",
+    "requirejs": "^2.2.0"
   },
   "devDependencies": {
     "babel": "5.8.21",
@@ -56,5 +57,6 @@
   },
   "bin": {
     "os-types": "src/cli.js"
-  }
+  },
+  "version": "0.0.0"
 }

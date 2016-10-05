@@ -160,7 +160,7 @@ describe('os-types', function() {
         });
       });
     });
-    it('prevents correctly ducplicates', function () {
+    it('prevents correctly duplicates', function () {
       var title_pairs = [
         [['אבא', 'activity_generic_program_code'],
           ['אמא', 'activity_generic_program_code_2'],
@@ -208,6 +208,13 @@ describe('os-types', function() {
             type: _case[0],
             options: _case[1],
             data: _case[2]
+          },
+          {
+            name: 'dummy2',
+            type: _case[0],
+            options: _case[1],
+            data: _case[2],
+            description: 'dummy-description'
           }
         ];
         var model = tp.fieldsToModel(fields);
