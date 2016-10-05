@@ -86,7 +86,8 @@ class TypeProcessor {
             });
         // ... and no unknown properties ...
         var allowedProperties = [
-            'name', 'title', 'type', 'format', 'data', 'options', 'resource' // common properties
+            'name', 'title', 'type', 'format', 'data',
+            'options', 'resource', 'description' // common properties
         ];
         valid = valid &&
             _.every(fields, (f) => {
