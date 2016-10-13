@@ -12,9 +12,17 @@
     "displayName": "Contract",
     "description": "The contract that's being funded or related to the spending line"
   },
-  "activity:generic:contract:code": {
+  "activity:generic:contract:code:": {
     "displayName": "Unique Identifier",
     "description": "A code or unique identifier for the contract"
+  },
+  "activity:generic:contract:code:full": {
+    "displayName": "Unique Identifier",
+    "description": "A complete code or unique identifier for the contract"
+  },
+  "activity:generic:contract:code:part": {
+    "displayName": "Unique Identifier",
+    "description": "A partial code or unique identifier for the contract (will be combined with the sub/project code)"
   },
   "activity:generic:contract:label": {
     "displayName": "Display Name",
@@ -36,9 +44,17 @@
     "displayName": "Project",
     "description": "The project that's being funded or related to the spending line"
   },
-  "activity:generic:project:code": {
+  "activity:generic:project:code:": {
     "displayName": "Unique Identifier",
     "description": "A code or unique identifier for the project"
+  },
+  "activity:generic:project:code:full": {
+    "displayName": "Unique Identifier",
+    "description": "A complete code or unique identifier for the project"
+  },
+  "activity:generic:project:code:part": {
+    "displayName": "Unique Identifier",
+    "description": "A partial code or unique identifier for the project (will be combined with the program code)"
   },
   "activity:generic:project:label": {
     "displayName": "Display Name",
@@ -48,9 +64,17 @@
     "displayName": "Sub-Project",
     "description": "The sub-project that's being funded or related to the spending line"
   },
-  "activity:generic:subproject:code": {
+  "activity:generic:subproject:code:": {
     "displayName": "Unique Identifier",
     "description": "A code or unique identifier for the sub-project"
+  },
+  "activity:generic:subproject:code:full": {
+    "displayName": "Unique Identifier",
+    "description": "A complete code or unique identifier for the sub-project"
+  },
+  "activity:generic:subproject:code:part": {
+    "displayName": "Unique Identifier",
+    "description": "A partial code or unique identifier for the sub-project (will be combined with the project code)"
   },
   "activity:generic:subproject:label": {
     "displayName": "Display Name",
@@ -1043,9 +1067,17 @@
     "displayName": "2nd Level for a hierarchical financial source",
     "description": "Identifiers and labels for the 2nd level of the financial source hierarchy"
   },
-  "fin-source:generic:level2:code": {
+  "fin-source:generic:level2:code:": {
     "displayName": "Unique Identifier",
     "description": "A code or unique identifier for the 2nd level of the financial source hierarchy"
+  },
+  "fin-source:generic:level2:code:full": {
+    "displayName": "Unique Identifier",
+    "description": "A complete code or unique identifier for the 2nd level of the financial source hierarchy"
+  },
+  "fin-source:generic:level2:code:part": {
+    "displayName": "Unique Identifier",
+    "description": "A partial code or unique identifier for the 2nd level of the financial source hierarchy (will be combined with the level1 code"
   },
   "fin-source:generic:level2:label": {
     "displayName": "Display Name",

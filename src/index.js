@@ -310,12 +310,19 @@ class TypeProcessor {
                         this._fieldError(field.name, "Couldn't find a column mapped to the matching 'code' ("+labelfor+")");
                     }
                 }
-                if ( parent ) {
+                while ( parent ) {
                     var targetAttribute = findAttribute(null, parent);
+                    var osTypeName = _.find(_.keys(this.types), (i) => {
+                        return _.startsWith(i, parent);
+                    });
+                    osType = this.types[osTypeName];
+                    parent = osType.parent;
                     if ( targetAttribute ) {
                         attribute.parent = targetAttribute.key;
-                    } else {
-                        this._fieldError(field.name, "Couldn't find a column mapped to the parent of this type ("+parent+")");
+                        break;
+                    } else if (!parent) {
+                        this._fieldError(field.name, "Couldn't find a column mapped to the parent of this type ("+
+                                                     (this.types[field.osType].parent)+")");
                     }
                 }
             }

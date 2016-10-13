@@ -1,26 +1,38 @@
 {
-  "activity:generic:contract:code": {
-    "dataType": "string", 
-    "dimensionType": "activity", 
-    "parent": "activity:generic:project:code", 
+  "activity:generic:contract:code:full": {
+    "dataType": "string",
+    "dimensionType": "activity",
+    "parent": "activity:generic:subproject:code",
     "uniqueIdentifier": true
-  }, 
+  },
+  "activity:generic:contract:code:part": {
+    "dataType": "string",
+    "dimensionType": "activity",
+    "parent": "activity:generic:subproject:code",
+    "uniqueIdentifier": true
+  },
   "activity:generic:contract:label": {
     "dataType": "string", 
     "dimensionType": "activity", 
     "labelfor": "activity:generic:contract:code"
-  }, 
+  },
   "activity:generic:program:code": {
-    "dataType": "string", 
-    "dimensionType": "activity", 
+    "dataType": "string",
+    "dimensionType": "activity",
     "uniqueIdentifier": true
-  }, 
+  },
   "activity:generic:program:label": {
     "dataType": "string", 
     "dimensionType": "activity", 
     "labelfor": "activity:generic:program:code"
   },
-  "activity:generic:project:code": {
+  "activity:generic:project:code:full": {
+    "dataType": "string",
+    "dimensionType": "activity",
+    "parent": "activity:generic:program:code",
+    "uniqueIdentifier": true
+  },
+  "activity:generic:project:code:part": {
     "dataType": "string",
     "dimensionType": "activity",
     "parent": "activity:generic:program:code",
@@ -31,7 +43,13 @@
     "dimensionType": "activity",
     "labelfor": "activity:generic:project:code"
   },
-  "activity:generic:subproject:code": {
+  "activity:generic:subproject:code:full": {
+    "dataType": "string",
+    "dimensionType": "activity",
+    "parent": "activity:generic:project:code",
+    "uniqueIdentifier": true
+  },
+  "activity:generic:subproject:code:part": {
     "dataType": "string",
     "dimensionType": "activity",
     "parent": "activity:generic:project:code",
@@ -984,7 +1002,11 @@
     "dimensionType": "other",
     "labelfor": "fin-source:generic:level1:code"
   },
-  "fin-source:generic:level2:code": {
+  "fin-source:generic:level2:code:full": {
+    "dimensionType": "other",
+    "dataType": "string"
+  },
+  "fin-source:generic:level2:code:part": {
     "dimensionType": "other",
     "dataType": "string"
   },

@@ -21,8 +21,8 @@ describe('os-types', function() {
       }
     });
 
-    it('should contain `activity:generic:contract:code`', function () {
-      expect(tp.getAllTypes()).to.include('activity:generic:contract:code');
+    it('should contain `activity:generic:contract:code:part`', function () {
+      expect(tp.getAllTypes()).to.include('activity:generic:contract:code:part');
     });
   });
 
@@ -120,7 +120,7 @@ describe('os-types', function() {
     });
     it('returns non null for valid objects', function () {
       var valids = [
-        [{type: 'activity:generic:contract:code', name: 'hello world'}],
+        [{type: 'activity:generic:contract:code:full', name: 'hello world'}],
         [{type: '', name: 'hello world'}],
         [{type: null, name: 'hello world'}]
       ];
@@ -136,16 +136,16 @@ describe('os-types', function() {
         [['héllô₪wörld', 'hello_world']],
         [['שלום עולם', 'activity_generic_program_code']],
         [['שלום עולם', 'activity_generic_program_code'],
-          ['אכלת פלפל', 'activity_generic_project_code'],
-          ['שתה מיץ', 'activity_generic_contract_code']],
+          ['אכלת פלפל', 'activity_generic_project_code_part'],
+          ['שתה מיץ', 'activity_generic_contract_code_part']],
         [['שלום עולם', 'activity_generic_program_code'],
           ['activity_generic_program_code', 'activity_generic_program_code_2'],
           ['activity_generic_program_code_2', 'activity_generic_program_code_2_2']]
       ];
       var types = [
         'activity:generic:program:code',
-        'activity:generic:project:code',
-        'activity:generic:contract:code'
+        'activity:generic:project:code:part',
+        'activity:generic:contract:code:part'
       ];
       title_pairs.forEach((titles) => {
         let s = [];
@@ -302,7 +302,9 @@ describe('os-types', function() {
         {type: 'administrative-classification:generic:level1:code:part', name: 'lvl1-code'},
         {type: 'administrative-classification:generic:level1:label', name: 'lvl1-label'},
         {type: 'administrative-classification:generic:level2:code:part', name: 'lvl2-code'},
-        {type: 'administrative-classification:generic:level2:label', name: 'lvl2-label'}
+        {type: 'administrative-classification:generic:level2:label', name: 'lvl2-label'},
+        {type: 'administrative-classification:generic:level4:code:full', name: 'lvl4-code'},
+        {type: 'administrative-classification:generic:level4:label', name: 'lvl4-label'}
       ];
       var ret = tp.fieldsToModel(fields);
       expect(ret).to.not.equal(null);
@@ -319,6 +321,12 @@ describe('os-types', function() {
       expect(model.dimensions['administrative-classification']
         .attributes[schema['lvl2-code'].slug].parent)
         .to.be.equal(schema['lvl1-code'].slug);
+      expect(model.dimensions['administrative-classification']
+        .attributes[schema['lvl4-code'].slug].parent)
+        .to.be.equal(schema['lvl2-code'].slug);
+      expect(model.dimensions['administrative-classification']
+        .attributes[schema['lvl4-label'].slug].labelfor)
+        .to.be.equal(schema['lvl4-code'].slug);
     });
     it('detects missing labelfor relations', function () {
       var fields = [
@@ -426,7 +434,7 @@ describe('os-types', function() {
     });
     it('should order correctly ', function () {
       var fields = [
-        {type: 'administrative-classification:generic:level4:code:part', name: 'lvl4-code'},
+        //{type: 'administrative-classification:generic:level4:code:part', name: 'lvl4-code'},
         {type: 'administrative-classification:generic:level3:code:part', name: 'lvl3-code'},
         {type: 'administrative-classification:generic:level7:code:part', name: 'lvl7-code'},
         {type: 'administrative-classification:generic:level2:code:part', name: 'lvl2-code'},
@@ -443,7 +451,7 @@ describe('os-types', function() {
         'lvl1_code',
         'lvl2_code',
         'lvl3_code',
-        'lvl4_code',
+        //'lvl4_code',
         'lvl5_code',
         'lvl6_code',
         'lvl7_code'
