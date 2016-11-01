@@ -134,23 +134,25 @@ class TypeProcessor {
                     this._fieldError(f.name, "Got unknown options key "+diff);
             });
         // ... and data samples match the selected datatype ...
-        _.forEach(fields, (f) => {
-            if ( f.type && f.data ) {
-                var typeOptions = _.get(extraOptions, 'dataTypes.'+this.types[f.type].dataType+'.options', []);
-                typeOptions = _.keyBy(typeOptions, 'name');
-                var options = _.pick(f.options,
-                  _.keys(typeOptions)
-                );
-                options = _.mapValues(options, (value, key) => {
-                    return (typeOptions[key].transform || this.ident)(value);
-                });
-                var jtsType = this._getJTSTypeByName(this.types[f.type].dataType, options);
-                _.every(f.data, (datum) => {
-                    return jtsType.cast(datum) ||
-                      this._fieldError(f.name, "Data cannot be cast to this type '"+datum+"'");
-                });
-            }
-        });
+        if (valid) {
+            _.forEach(fields, (f) => {
+                if ( f.type && f.data ) {
+                    var typeOptions = _.get(extraOptions, 'dataTypes.'+this.types[f.type].dataType+'.options', []);
+                    typeOptions = _.keyBy(typeOptions, 'name');
+                    var options = _.pick(f.options,
+                      _.keys(typeOptions)
+                    );
+                    options = _.mapValues(options, (value, key) => {
+                        return (typeOptions[key].transform || this.ident)(value);
+                    });
+                    var jtsType = this._getJTSTypeByName(this.types[f.type].dataType, options);
+                    _.every(f.data, (datum) => {
+                        return jtsType.cast(datum) ||
+                          this._fieldError(f.name, "Data cannot be cast to this type '"+datum+"'");
+                    });
+                }
+            });
+        }
         return valid;
     }
 

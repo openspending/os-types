@@ -112,7 +112,8 @@ describe('os-types', function() {
         [{type: 'moshe', name: 'miko'}],
         ["arr"],
         [{type: 'activity:generic:contract:code', name: 'aaa', extra: 'bbb'}],
-        [{type: 'activity:generic:contract:code', name: 'aaa', options: {'bbb': 1}}]
+        [{type: 'activity:generic:contract:code', name: 'aaa', options: {'bbb': 1}}],
+        [{type: 'activity:generic:project:code', name: 'aaa', data: ['a', 'b']}]
       ];
       invalids.forEach((s) => {
         expect(tp.fieldsToModel(s).errors).to.be.ok;

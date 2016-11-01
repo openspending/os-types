@@ -17,11 +17,11 @@
     "description": "A code or unique identifier for the contract"
   },
   "activity:generic:contract:code:full": {
-    "displayName": "Unique Identifier",
+    "displayName": "Complete Identifier",
     "description": "A complete code or unique identifier for the contract"
   },
   "activity:generic:contract:code:part": {
-    "displayName": "Unique Identifier",
+    "displayName": "Partial Identifier",
     "description": "A partial code or unique identifier for the contract (will be combined with the sub/project code)"
   },
   "activity:generic:contract:label": {
@@ -49,11 +49,11 @@
     "description": "A code or unique identifier for the project"
   },
   "activity:generic:project:code:full": {
-    "displayName": "Unique Identifier",
+    "displayName": "Complete Identifier",
     "description": "A complete code or unique identifier for the project"
   },
   "activity:generic:project:code:part": {
-    "displayName": "Unique Identifier",
+    "displayName": "Partial Identifier",
     "description": "A partial code or unique identifier for the project (will be combined with the program code)"
   },
   "activity:generic:project:label": {
@@ -69,11 +69,11 @@
     "description": "A code or unique identifier for the sub-project"
   },
   "activity:generic:subproject:code:full": {
-    "displayName": "Unique Identifier",
+    "displayName": "Complete Identifier",
     "description": "A complete code or unique identifier for the sub-project"
   },
   "activity:generic:subproject:code:part": {
-    "displayName": "Unique Identifier",
+    "displayName": "Partial Identifier",
     "description": "A partial code or unique identifier for the sub-project (will be combined with the project code)"
   },
   "activity:generic:subproject:label": {
@@ -1072,11 +1072,11 @@
     "description": "A code or unique identifier for the 2nd level of the financial source hierarchy"
   },
   "fin-source:generic:level2:code:full": {
-    "displayName": "Unique Identifier",
+    "displayName": "Complete Identifier",
     "description": "A complete code or unique identifier for the 2nd level of the financial source hierarchy"
   },
   "fin-source:generic:level2:code:part": {
-    "displayName": "Unique Identifier",
+    "displayName": "Partial Identifier",
     "description": "A partial code or unique identifier for the 2nd level of the financial source hierarchy (will be combined with the level1 code"
   },
   "fin-source:generic:level2:label": {
