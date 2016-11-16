@@ -77,13 +77,7 @@
     "dimensionType": "classification", 
     "labelfor": "administrative-classification:generic:code"
   }, 
-  "administrative-classification:generic:level1:code:full": {
-    "classificationType": "administrative", 
-    "dataType": "string", 
-    "dimensionType": "classification", 
-    "uniqueIdentifier": true
-  }, 
-  "administrative-classification:generic:level1:code:part": {
+  "administrative-classification:generic:level1:code": {
     "classificationType": "administrative", 
     "dataType": "string", 
     "dimensionType": "classification", 
@@ -321,13 +315,7 @@
     "dimensionType": "classification",
     "labelfor": "economic-classification:generic:code"
   }, 
-  "economic-classification:generic:level1:code:full": {
-    "classificationType": "economic", 
-    "dataType": "string", 
-    "dimensionType": "classification", 
-    "uniqueIdentifier": true
-  }, 
-  "economic-classification:generic:level1:code:part": {
+  "economic-classification:generic:level1:code": {
     "classificationType": "economic", 
     "dataType": "string", 
     "dimensionType": "classification", 
@@ -630,13 +618,7 @@
     "dataType": "string", 
     "dimensionType": "classification"
   }, 
-  "functional-classification:cofog:division:code:full": {
-    "classificationType": "functional", 
-    "dataType": "string", 
-    "dimensionType": "classification", 
-    "uniqueIdentifier": true
-  }, 
-  "functional-classification:cofog:division:code:part": {
+  "functional-classification:cofog:division:code": {
     "classificationType": "functional", 
     "dataType": "string", 
     "dimensionType": "classification", 
@@ -701,13 +683,7 @@
     "dimensionType": "classification",
     "labelfor": "functional-classification:generic:code"
   }, 
-  "functional-classification:generic:level1:code:full": {
-    "classificationType": "functional", 
-    "dataType": "string", 
-    "dimensionType": "classification", 
-    "uniqueIdentifier": true
-  }, 
-  "functional-classification:generic:level1:code:part": {
+  "functional-classification:generic:level1:code": {
     "classificationType": "functional", 
     "dataType": "string", 
     "dimensionType": "classification", 
@@ -1004,11 +980,13 @@
   },
   "fin-source:generic:level2:code:full": {
     "dimensionType": "other",
-    "dataType": "string"
+    "dataType": "string",
+    "parent": "fin-source:generic:level1:code"
   },
   "fin-source:generic:level2:code:part": {
     "dimensionType": "other",
-    "dataType": "string"
+    "dataType": "string",
+    "parent": "fin-source:generic:level1:code"
   },
   "fin-source:generic:level2:label": {
     "dimensionType": "other",

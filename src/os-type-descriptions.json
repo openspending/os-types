@@ -105,17 +105,9 @@
     "displayName": "Top Classification Level",
     "description": "Top level of the Administrative Classification"
   },
-  "administrative-classification:generic:level1:code:": {
+  "administrative-classification:generic:level1:code": {
     "displayName": "Unique Identifier",
     "description": "A code or unique identifier for the top level of the classification"
-  },
-  "administrative-classification:generic:level1:code:full": {
-    "displayName": "Complete Identifier",
-    "description": "The complete code or unique identifier for the top level of the classification"
-  },
-  "administrative-classification:generic:level1:code:part": {
-    "displayName": "Partial Identifier",
-    "description": "A partial representation of code or unique identifier for the top level of the classification"
   },
   "administrative-classification:generic:level1:label": {
     "displayName": "Display Name",
@@ -358,17 +350,9 @@
     "displayName": "Top Classification Level",
     "description": "Top level of the Economic Classification"
   },
-  "economic-classification:generic:level1:code:": {
+  "economic-classification:generic:level1:code": {
     "displayName": "Unique Identifier",
     "description": "A code or unique identifier for the top level of the classification"
-  },
-  "economic-classification:generic:level1:code:full": {
-    "displayName": "Complete Identifier",
-    "description": "The complete code or unique identifier for the top level of the classification"
-  },
-  "economic-classification:generic:level1:code:part": {
-    "displayName": "Partial Identifier",
-    "description": "A partial representation of code or unique identifier for the top level of the classification"
   },
   "economic-classification:generic:level1:label": {
     "displayName": "Display Name",
@@ -654,17 +638,9 @@
     "displayName": "COFOG Division",
     "description": "The COFOG 'Division' Level "
   },
-  "functional-classification:cofog:division:code:": {
+  "functional-classification:cofog:division:code": {
     "displayName": "COFOG Division code",
     "description": "The COFOG 'Division' Level code"
-  },
-  "functional-classification:cofog:division:code:full": {
-    "displayName": "Full COFOG Division code",
-    "description": "The full COFOG 'Division' Level code"
-  },
-  "functional-classification:cofog:division:code:part": {
-    "displayName": "Partial COFOG Division code",
-    "description": "A partial COFOG 'Division' Level code"
   },
   "functional-classification:cofog:division:description": {
     "displayName": "COFOG Division description",
@@ -727,17 +703,9 @@
     "displayName": "Top Classification Level",
     "description": "Top level of the Functional Classification"
   },
-  "functional-classification:generic:level1:code:": {
+  "functional-classification:generic:level1:code": {
     "displayName": "Unique Identifier",
     "description": "A code or unique identifier for the top level of the classification"
-  },
-  "functional-classification:generic:level1:code:full": {
-    "displayName": "Complete Identifier",
-    "description": "The complete code or unique identifier for the top level of the classification"
-  },
-  "functional-classification:generic:level1:code:part": {
-    "displayName": "Partial Identifier",
-    "description": "A partial representation of code or unique identifier for the top level of the classification"
   },
   "functional-classification:generic:level1:label": {
     "displayName": "Display Name",

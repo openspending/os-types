@@ -300,7 +300,7 @@ describe('os-types', function() {
     });
     it('adds correctly labelfor and parent', function () {
       var fields = [
-        {type: 'administrative-classification:generic:level1:code:part', name: 'lvl1-code'},
+        {type: 'administrative-classification:generic:level1:code', name: 'lvl1-code'},
         {type: 'administrative-classification:generic:level1:label', name: 'lvl1-label'},
         {type: 'administrative-classification:generic:level2:code:part', name: 'lvl2-code'},
         {type: 'administrative-classification:generic:level2:label', name: 'lvl2-label'},
@@ -331,7 +331,7 @@ describe('os-types', function() {
     });
     it('detects missing labelfor relations', function () {
       var fields = [
-        {type: 'administrative-classification:generic:level1:code:part', name: 'lvl1-code'},
+        {type: 'administrative-classification:generic:level1:code', name: 'lvl1-code'},
         {type: 'administrative-classification:generic:level1:label', name: 'lvl1-label'},
         {type: 'administrative-classification:generic:level2:label', name: 'lvl2-label'}
       ];
@@ -439,7 +439,7 @@ describe('os-types', function() {
         {type: 'administrative-classification:generic:level3:code:part', name: 'lvl3-code'},
         {type: 'administrative-classification:generic:level7:code:part', name: 'lvl7-code'},
         {type: 'administrative-classification:generic:level2:code:part', name: 'lvl2-code'},
-        {type: 'administrative-classification:generic:level1:code:part', name: 'lvl1-code'},
+        {type: 'administrative-classification:generic:level1:code', name: 'lvl1-code'},
         {type: 'administrative-classification:generic:level6:code:part', name: 'lvl6-code'},
         {type: 'administrative-classification:generic:level5:code:part', name: 'lvl5-code'}
       ];
@@ -492,6 +492,14 @@ describe('os-types', function() {
           }
         });
         expect(dataType).to.not.be.null;
+      });
+    });
+
+    it('partial codes need to have a parent', function() {
+      _.forEach(osTypes, function(osTypeValue, osType) {
+        if (_.endsWith(osType, ':part')) {
+          expect(osTypeValue.parent).to.be.ok;
+        }
       });
     });
 
