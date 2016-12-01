@@ -920,6 +920,33 @@
     "dimensionType": "location",
     "labelfor": "geo-source:target:code"
   },
+  "geo-source:target:level1:code": {
+    "dataType": "string",
+    "dimensionType": "location",
+    "uniqueIdentifier": true
+  },
+  "geo-source:target:level1:title": {
+    "dataType": "string",
+    "dimensionType": "location",
+    "labelfor": "geo-source:target:level1:code"
+  },
+  "geo-source:target:level2:code:full": {
+    "dataType": "string",
+    "dimensionType": "location",
+    "uniqueIdentifier": true,
+    "parent": "geo-source:target:level1:code"
+  },
+  "geo-source:target:level2:code:part": {
+    "dataType": "string",
+    "dimensionType": "location",
+    "uniqueIdentifier": true,
+    "parent": "geo-source:target:level1:code"
+  },
+  "geo-source:target:level2:title": {
+    "dataType": "string",
+    "dimensionType": "location",
+    "labelfor": "geo-source:target:level2:code"
+  },
   "invoice-id": {
     "dataType": "string", 
     "dimensionType": "fact", 
@@ -991,7 +1018,22 @@
   "fin-source:generic:level2:label": {
     "dimensionType": "other",
     "dataType": "string",
-    "labelfor": "fin-source:generic:level1:code"
+    "labelfor": "fin-source:generic:level2:code"
+  },
+  "fin-source:generic:level3:code:full": {
+    "dimensionType": "other",
+    "dataType": "string",
+    "parent": "fin-source:generic:level2:code"
+  },
+  "fin-source:generic:level3:code:part": {
+    "dimensionType": "other",
+    "dataType": "string",
+    "parent": "fin-source:generic:level2:code"
+  },
+  "fin-source:generic:level3:label": {
+    "dimensionType": "other",
+    "dataType": "string",
+    "labelfor": "fin-source:generic:level3:code"
   },
   "expenditure-type:code": {
     "dimensionType": "other",

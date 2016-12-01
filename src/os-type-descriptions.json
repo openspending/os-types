@@ -936,6 +936,38 @@
     "displayName": "Display Name",
     "description": "The display name of the geographic feature"
   },
+  "geo-source:target:level1:": {
+    "displayName": "Top Level",
+    "description": "Top Level for Target Geographic information"
+  },
+  "geo-source:target:level1:code": {
+    "displayName": "Unique identifier",
+    "description": "Unique identifier or code for the Top Level Geographic feature specified in the data"
+  },
+  "geo-source:target:level1:title": {
+    "displayName": "Unique identifier",
+    "description": "The display name for the Top Level Geographic feature specified in the data"
+  },
+  "geo-source:target:level2:": {
+    "displayName": "2nd Level",
+    "description": "2nd Level for Target Geographic information"
+  },
+  "geo-source:target:level2:code:": {
+    "displayName": "Unique identifier",
+    "description": "Unique identifier or code for the 2nd Level Geographic feature specified in the data"
+  },
+  "geo-source:target:level2:code:full": {
+    "displayName": "Complete Unique identifier",
+    "description": "Complete Unique identifier or code for the 2nd Level Geographic feature specified in the data"
+  },
+  "geo-source:target:level2:code:part": {
+    "displayName": "Partial Unique identifier",
+    "description": "Partial Unique identifier or code for the 2nd Level Geographic feature specified in the data"
+  },
+  "geo-source:target:level2:title": {
+    "displayName": "Unique identifier",
+    "description": "The display name for the 2nd Level Geographic feature specified in the data"
+  },
   "invoice-id": {
     "displayName": "Invoice Identifier",
     "description": "A unique identifier for this invoice",
@@ -1050,6 +1082,26 @@
   "fin-source:generic:level2:label": {
     "displayName": "Display Name",
     "description": "Display name or title for the 2nd level of the financial source hierarchy"
+  },
+  "fin-source:generic:level3:": {
+    "displayName": "3rd Level for a hierarchical financial source",
+    "description": "Identifiers and labels for the 3rd level of the financial source hierarchy"
+  },
+  "fin-source:generic:level3:code:": {
+    "displayName": "Unique Identifier",
+    "description": "A code or unique identifier for the 3rd level of the financial source hierarchy"
+  },
+  "fin-source:generic:level3:code:full": {
+    "displayName": "Complete Identifier",
+    "description": "A complete code or unique identifier for the 3rd level of the financial source hierarchy"
+  },
+  "fin-source:generic:level3:code:part": {
+    "displayName": "Partial Identifier",
+    "description": "A partial code or unique identifier for the 3rd level of the financial source hierarchy (will be combined with the level1 code"
+  },
+  "fin-source:generic:level3:label": {
+    "displayName": "Display Name",
+    "description": "Display name or title for the 3rd level of the financial source hierarchy"
   },
   "expenditure-type:": {
     "displayName": "Expenditure Type",
