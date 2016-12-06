@@ -1008,11 +1008,16 @@
     "dataType": "string",
     "dimensionType": "fact"
   },
-  "phase": {
-    "dataType": "string", 
-    "dimensionType": "other", 
+  "phase:id": {
+    "dataType": "string",
+    "dimensionType": "other",
     "uniqueIdentifier": true
-  }, 
+  },
+  "phase:label": {
+    "dataType": "string",
+    "dimensionType": "other",
+    "labelfor": "phase:id"
+  },
   "procurer:generic:id": {
     "dataType": "string", 
     "dimensionType": "entity", 

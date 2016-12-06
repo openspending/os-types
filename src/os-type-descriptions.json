@@ -1029,10 +1029,18 @@
     "displayName": "Transaction Kind",
     "description": "Unique identifier for the Transaction Kind for this transaction"
   },
-  "phase": {
+  "phase:": {
     "displayName": "Budget Life-cycle Phase",
-    "description": "The phase identifier for the values in this line (e.g. approved, executed etc.)",
+    "description": "The phase for the values in this line (e.g. approved, executed etc.)",
     "group": "500-Fiscal Attributes"
+  },
+  "phase:id": {
+    "displayName": "Phase Identifier",
+    "description": "The phase identifier"
+  },
+  "phase:label": {
+    "displayName": "Budget Life-cycle Phase",
+    "description": "The phase display name"
   },
   "procurer:": {
     "displayName": "Procurer",
