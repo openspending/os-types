@@ -276,7 +276,8 @@
   }, 
   "administrator:generic:name": {
     "dataType": "string", 
-    "dimensionType": "entity"
+    "dimensionType": "entity",
+    "labelfor": "administrator:generic:id"
   }, 
   "budget-line-id": {
     "dataType": "string", 
@@ -947,11 +948,49 @@
     "dimensionType": "location",
     "labelfor": "geo-source:target:level2:code"
   },
-  "invoice-id": {
-    "dataType": "string", 
-    "dimensionType": "fact", 
+  "transaction-id:code": {
+    "dataType": "string",
+    "dimensionType": "fact",
     "uniqueIdentifier": true
-  }, 
+  },
+  "transaction-id:purchase-order": {
+    "dataType": "string",
+    "dimensionType": "fact",
+    "uniqueIdentifier": true
+  },
+  "transaction-id:invoice-id": {
+    "dataType": "string",
+    "dimensionType": "fact",
+    "uniqueIdentifier": true
+  },
+  "transaction-id:tender-id": {
+    "dataType": "string",
+    "dimensionType": "fact",
+    "uniqueIdentifier": true
+  },
+  "transaction-id:tender-kind": {
+    "dataType": "string",
+    "dimensionType": "fact"
+  },
+  "transaction-id:contract-id": {
+    "dataType": "string",
+    "dimensionType": "fact",
+    "uniqueIdentifier": true
+  },
+  "transaction-id:budget-code": {
+    "dataType": "string",
+    "dimensionType": "fact",
+    "uniqueIdentifier": true
+  },
+  "transaction-id:court-order": {
+    "dataType": "string",
+    "dimensionType": "fact",
+    "uniqueIdentifier": true
+  },
+  "transaction-id:transaction-kind": {
+    "dataType": "string",
+    "dimensionType": "fact"
+  },
   "phase": {
     "dataType": "string", 
     "dimensionType": "other", 
@@ -964,17 +1003,53 @@
   }, 
   "procurer:generic:name": {
     "dataType": "string", 
+    "dimensionType": "entity",
+    "labelfor": "procurer:generic:id"
+  },
+  "procurer:bank:code": {
+    "dataType": "string",
     "dimensionType": "entity"
-  }, 
+  },
+  "procurer:bank:account": {
+    "dataType": "string",
+    "dimensionType": "entity"
+  },
+  "procurer:bank:branch:code": {
+    "dataType": "string",
+    "dimensionType": "entity"
+  },
+  "procurer:bank:branch:name": {
+    "dataType": "string",
+    "dimensionType": "entity",
+    "labelfor": "procurer:bank:branch:code"
+  },
   "recipient:generic:id": {
     "dataType": "string", 
     "dimensionType": "entity", 
     "uniqueIdentifier": true
-  }, 
+  },
   "recipient:generic:name": {
-    "dataType": "string", 
+    "dataType": "string",
+    "dimensionType": "entity",
+    "labelfor": "recipient:generic:id"
+  },
+  "recipient:bank:code": {
+    "dataType": "string",
     "dimensionType": "entity"
-  }, 
+  },
+  "recipient:bank:account": {
+    "dataType": "string",
+    "dimensionType": "entity"
+  },
+  "recipient:bank:branch:code": {
+    "dataType": "string",
+    "dimensionType": "entity"
+  },
+  "recipient:bank:branch:name": {
+    "dataType": "string",
+    "dimensionType": "entity",
+    "labelfor": "recipient:bank:branch:name"
+  },
   "supplier:generic:id": {
     "dataType": "string", 
     "dimensionType": "entity", 
@@ -982,7 +1057,8 @@
   }, 
   "supplier:generic:name": {
     "dataType": "string", 
-    "dimensionType": "entity"
+    "dimensionType": "entity",
+    "labelfor": "supplier:generic:id"
   }, 
   "value": {
     "dataType": "number"

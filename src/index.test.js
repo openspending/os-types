@@ -547,6 +547,21 @@ describe('os-types', function() {
       });
     });
 
+    it('should have labelfor for all names and labels', function() {
+      _.forEach(osTypes, function(osTypeValue, osType) {
+        var parts = osType.split(':');
+        var lastPart = parts[parts.length-1];
+        if (lastPart == 'label' || lastPart == 'name' || lastPart == 'title') {
+          var labelfor = osTypeValue.labelfor;
+          if (!labelfor) {
+            console.log('MISSING "labelfor" FOR', osType);
+          }
+          expect(labelfor).to.be.ok;
+        }
+      });
+    });
+
+
   });
 
 });

@@ -968,10 +968,46 @@
     "displayName": "Unique identifier",
     "description": "The display name for the 2nd Level Geographic feature specified in the data"
   },
-  "invoice-id": {
-    "displayName": "Invoice Identifier",
-    "description": "A unique identifier for this invoice",
+  "transaction-id:": {
+    "displayName": "Transaction Identifiers",
+    "description": "Unique identifiers for this transaction",
     "group": "700-Identifiers"
+  },
+  "transaction-id:code": {
+    "displayName": "Unique Identifier",
+    "description": "A Unique identifier for this transaction"
+  },
+  "transaction-id:purchase-order": {
+    "displayName": "Purchase Order",
+    "description": "Unique identifier for the Purchase Order for this transaction"
+  },
+  "transaction-id:invoice-id": {
+    "displayName": "Invoice Identifier",
+    "description": "Unique identifier for the Invoice for this transaction"
+  },
+  "transaction-id:tender-id": {
+    "displayName": "Tender",
+    "description": "Unique identifier for the Tender for this transaction"
+  },
+  "transaction-id:tender-kind": {
+    "displayName": "Tender Kind",
+    "description": "Unique identifier for the Tender Kind for this transaction"
+  },
+  "transaction-id:contract-id": {
+    "displayName": "Contract Identifier",
+    "description": "Unique identifier for the Contract for this transaction"
+  },
+  "transaction-id:budget-code": {
+    "displayName": "Budget Code",
+    "description": "Unique identifier for the Budget Line for this transaction"
+  },
+  "transaction-id:court-order": {
+    "displayName": "Court Order",
+    "description": "Unique identifier for the Court Order for this transaction"
+  },
+  "transaction-id:transaction-kind": {
+    "displayName": "Transaction Kind",
+    "description": "Unique identifier for the Transaction Kind for this transaction"
   },
   "phase": {
     "displayName": "Budget Life-cycle Phase",
@@ -993,7 +1029,31 @@
   },
   "procurer:generic:name": {
     "displayName": "Display Name",
-    "description": "The display name for the Procurer"
+    "description": "The display name of the Procurer"
+  },
+  "procurer:bank:": {
+    "displayName": "Bank",
+    "description": "Bank information for the Procurer"
+  },
+  "procurer:bank:code": {
+    "displayName": "Identifier",
+    "description": "Unique identifier for the bank of the Procurer"
+  },
+  "procurer:bank:account": {
+    "displayName": "Account",
+    "description": "Unique identifier for the bank account of the Procurer"
+  },
+  "procurer:bank:branch:": {
+    "displayName": "Branch",
+    "description": "Information about the bank's branch of the Procurer"
+  },
+  "procurer:bank:branch:code": {
+    "displayName": "Identifier",
+    "description": "Unique identifier of the bank's branch of the Procurer"
+  },
+  "procurer:bank:branch:name": {
+    "displayName": "Display Name",
+    "description": "Name of the bank's branch of the Procurer"
   },
   "recipient:": {
     "displayName": "Recipient",
@@ -1011,6 +1071,30 @@
   "recipient:generic:name": {
     "displayName": "Display Name",
     "description": "The display name for the Recipient"
+  },
+  "recipient:bank:": {
+    "displayName": "Bank",
+    "description": "Bank information for the Recipient"
+  },
+  "recipient:bank:code": {
+    "displayName": "Identifier",
+    "description": "Unique identifier for the bank of the Recipient"
+  },
+  "recipient:bank:account": {
+    "displayName": "Account",
+    "description": "Unique identifier for the bank account of the Recipient"
+  },
+  "recipient:bank:branch:": {
+    "displayName": "Branch",
+    "description": "Information about the bank's branch of the Recipient"
+  },
+  "recipient:bank:branch:code": {
+    "displayName": "Identifier",
+    "description": "Unique identifier of the bank's branch of the Recipient"
+  },
+  "recipient:bank:branch:name": {
+    "displayName": "Display Name",
+    "description": "Name of the bank's branch of the Recipient"
   },
   "supplier:": {
     "displayName": "Supplier",
