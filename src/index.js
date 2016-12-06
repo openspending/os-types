@@ -16,6 +16,21 @@ class TypeProcessor {
         return Object.keys(this.types);
     }
 
+    getDataTypeExtraOptions(dataType) {
+      return _.union(
+        _.get(
+          extraOptions,
+          'dataTypes.' + this.types[dataType].dataType + '.options',
+          []
+        ),
+        _.get(
+          extraOptions,
+          'osTypes.' + dataType + '.options',
+          []
+        )
+      );
+    }
+
     autoComplete(prefix) {
         if ( !prefix ) {
             prefix = '';

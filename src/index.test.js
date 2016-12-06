@@ -2,6 +2,7 @@
 
 import {expect} from 'chai';
 import TypeProcessor from './index';
+import * as extraOptions from './extra-options'
 import _ from 'lodash';
 import JTS from 'jsontableschema';
 var osTypes = require('./os-types.json');
@@ -99,6 +100,14 @@ describe('os-types', function() {
         expect(v.description).to.be.ok;
       });
     });
+  });
+
+  describe('getDataTypeExtraOptions', function() {
+    it('should get extra options', function() {
+      expect(tp.getDataTypeExtraOptions('date:generic')).to.deep.equal(
+        extraOptions.dataTypes.date.options
+      )
+    })
   });
 
   describe('fieldsToModel', function () {
