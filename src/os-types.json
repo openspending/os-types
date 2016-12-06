@@ -26,16 +26,33 @@
     "dimensionType": "activity", 
     "labelfor": "activity:generic:program:code"
   },
+  "activity:generic:subprogram:code:full": {
+    "dataType": "string",
+    "dimensionType": "activity",
+    "uniqueIdentifier": true,
+    "parent": "activity:generic:program:code"
+  },
+  "activity:generic:subprogram:code:part": {
+    "dataType": "string",
+    "dimensionType": "activity",
+    "uniqueIdentifier": true,
+    "parent": "activity:generic:program:code"
+  },
+  "activity:generic:subprogram:label": {
+    "dataType": "string",
+    "dimensionType": "activity",
+    "labelfor": "activity:generic:subprogram:code"
+  },
   "activity:generic:project:code:full": {
     "dataType": "string",
     "dimensionType": "activity",
-    "parent": "activity:generic:program:code",
+    "parent": "activity:generic:subprogram:code",
     "uniqueIdentifier": true
   },
   "activity:generic:project:code:part": {
     "dataType": "string",
     "dimensionType": "activity",
-    "parent": "activity:generic:program:code",
+    "parent": "activity:generic:subprogram:code",
     "uniqueIdentifier": true
   },
   "activity:generic:project:label": {
