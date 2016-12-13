@@ -246,7 +246,7 @@ class TypeProcessor {
             }
             f.slug = this._titleToSlug(f.title, f.type);
             var conceptType = _.split(f.type,':')[0];
-            schema.fields[f.title] = {
+            schema.fields[f.name] = {
                 title: f.title,
                 name: f.name,
                 slug: f.slug,
@@ -260,7 +260,7 @@ class TypeProcessor {
                     _.get(extraOptions, 'osTypes.'+f.type+'.options', [])
                 )
             };
-            this._embedOptions(schema.fields[f.title], f.options, _.get(extraOptions, 'dataTypes.'+osType.dataType+'.options', []));
+            this._embedOptions(schema.fields[f.name], f.options, _.get(extraOptions, 'dataTypes.'+osType.dataType+'.options', []));
 
             if ( conceptType == 'value' ) {
                 // Measure
