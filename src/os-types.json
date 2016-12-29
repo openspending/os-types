@@ -305,12 +305,37 @@
     "dataType": "integer", 
     "dimensionType": "datetime", 
     "uniqueIdentifier": true
-  }, 
+  },
   "date:generic": {
-    "dataType": "date", 
-    "dimensionType": "datetime", 
+    "dataType": "date",
+    "dimensionType": "datetime",
     "uniqueIdentifier": true
-  }, 
+  },
+  "date:fiscal:activity-start": {
+    "dataType": "date",
+    "dimensionType": "datetime",
+    "uniqueIdentifier": true
+  },
+  "date:fiscal:activity-end": {
+    "dataType": "date",
+    "dimensionType": "datetime",
+    "uniqueIdentifier": true
+  },
+  "date:fiscal:activity-approval": {
+    "dataType": "date",
+    "dimensionType": "datetime",
+    "uniqueIdentifier": true
+  },
+  "date:fiscal:first-payment": {
+    "dataType": "date",
+    "dimensionType": "datetime",
+    "uniqueIdentifier": true
+  },
+  "date:fiscal:final-payment": {
+    "dataType": "date",
+    "dimensionType": "datetime",
+    "uniqueIdentifier": true
+  },
   "direction": {
     "dataType": "string", 
     "dimensionType": "other", 
@@ -540,9 +565,8 @@
     "classificationType": "economic", 
     "dataType": "string", 
     "dimensionType": "classification", 
-    "labelfor": "economic-classification:gfsm:level1:code", 
-    "uniqueIdentifier": true
-  }, 
+    "labelfor": "economic-classification:gfsm:level1:code"
+  },
   "economic-classification:gfsm:level2:code": {
     "classificationType": "economic", 
     "dataType": "string", 
@@ -559,9 +583,8 @@
     "classificationType": "economic", 
     "dataType": "string", 
     "dimensionType": "classification", 
-    "labelfor": "economic-classification:gfsm:level2:code", 
-    "uniqueIdentifier": true
-  }, 
+    "labelfor": "economic-classification:gfsm:level2:code"
+  },
   "economic-classification:gfsm:level3:code": {
     "classificationType": "economic", 
     "dataType": "string", 
@@ -578,9 +601,8 @@
     "classificationType": "economic", 
     "dataType": "string", 
     "dimensionType": "classification", 
-    "labelfor": "economic-classification:gfsm:level3:code", 
-    "uniqueIdentifier": true
-  }, 
+    "labelfor": "economic-classification:gfsm:level3:code"
+  },
   "economic-classification:gfsm:level4:code": {
     "classificationType": "economic", 
     "dataType": "string", 
@@ -597,9 +619,8 @@
     "classificationType": "economic", 
     "dataType": "string", 
     "dimensionType": "classification", 
-    "labelfor": "economic-classification:gfsm:level4:code", 
-    "uniqueIdentifier": true
-  }, 
+    "labelfor": "economic-classification:gfsm:level4:code"
+  },
   "functional-classification:cofog:class:code:full": {
     "classificationType": "functional", 
     "dataType": "string", 
@@ -965,6 +986,59 @@
     "dimensionType": "location",
     "labelfor": "geo-source:target:level2:code"
   },
+  "geo-source:address:country:code": {
+    "dataType": "string",
+    "dimensionType": "location",
+    "uniqueIdentifier": true
+  },
+  "geo-source:address:country:label": {
+    "dataType": "string",
+    "dimensionType": "location",
+    "labelfor": "geo-source:address:country:code"
+  },
+  "geo-source:address:region:code": {
+    "dataType": "string",
+    "dimensionType": "location",
+    "parent": "geo-source:address:country:code",
+    "uniqueIdentifier": true
+  },
+  "geo-source:address:region:label": {
+    "dataType": "string",
+    "dimensionType": "location",
+    "labelfor": "geo-source:address:region:code"
+  },
+  "geo-source:address:county:code": {
+    "dataType": "string",
+    "dimensionType": "location",
+    "parent": "geo-source:address:region:code",
+    "uniqueIdentifier": true
+  },
+  "geo-source:address:county:label": {
+    "dataType": "string",
+    "dimensionType": "location",
+    "labelfor": "geo-source:address:county:code"
+  },
+  "geo-source:address:city:code": {
+    "dataType": "string",
+    "dimensionType": "location",
+    "parent": "geo-source:address:county:code",
+    "uniqueIdentifier": true
+  },
+  "geo-source:address:city:label": {
+    "dataType": "string",
+    "dimensionType": "location",
+    "labelfor": "geo-source:address:city:code"
+  },
+  "geo-source:address:zip:code": {
+    "dataType": "string",
+    "dimensionType": "location",
+    "parent": "geo-source:address:city:code",
+    "uniqueIdentifier": true
+  },
+  "geo-source:address:street-address:description": {
+    "dataType": "string",
+    "dimensionType": "location"
+  },
   "transaction-id:code": {
     "dataType": "string",
     "dimensionType": "fact",
@@ -1030,7 +1104,8 @@
   },
   "procurer:bank:code": {
     "dataType": "string",
-    "dimensionType": "entity"
+    "dimensionType": "entity",
+    "uniqueIdentifier": true
   },
   "procurer:bank:account": {
     "dataType": "string",
@@ -1038,7 +1113,8 @@
   },
   "procurer:bank:branch:code": {
     "dataType": "string",
-    "dimensionType": "entity"
+    "dimensionType": "entity",
+    "uniqueIdentifier": true
   },
   "procurer:bank:branch:name": {
     "dataType": "string",
@@ -1055,9 +1131,48 @@
     "dimensionType": "entity",
     "labelfor": "recipient:generic:id"
   },
-  "recipient:bank:code": {
+  "recipient:generic:url": {
     "dataType": "string",
     "dimensionType": "entity"
+  },
+  "recipient:generic:legal-entity:code": {
+    "dataType": "string",
+    "dimensionType": "entity",
+    "parent": "recipient:generic:id",
+    "uniqueIdentifier": true
+  },
+  "recipient:generic:legal-entity:label": {
+    "dataType": "string",
+    "dimensionType": "entity",
+    "labelfor": "recipient:generic:legal-entity:code"
+  },
+  "recipient:generic:legal-entity:point-of-contact:description": {
+    "dataType": "string",
+    "dimensionType": "entity"
+  },
+  "recipient:generic:legal-entity:receiving-project:code": {
+    "dataType": "string",
+    "dimensionType": "entity",
+    "parent": "recipient:generic:legal-entity:code",
+    "uniqueIdentifier": true
+  },
+  "recipient:generic:legal-entity:receiving-project:label": {
+    "dataType": "string",
+    "dimensionType": "entity",
+    "labelfor": "recipient:generic:legal-entity:receiving-project:code"
+  },
+  "recipient:generic:legal-entity:receiving-project:status": {
+    "dataType": "string",
+    "dimensionType": "entity"
+  },
+  "recipient:generic:legal-entity:receiving-project:description": {
+    "dataType": "string",
+    "dimensionType": "entity"
+  },
+  "recipient:bank:code": {
+    "dataType": "string",
+    "dimensionType": "entity",
+    "uniqueIdentifier": true
   },
   "recipient:bank:account": {
     "dataType": "string",
@@ -1065,7 +1180,8 @@
   },
   "recipient:bank:branch:code": {
     "dataType": "string",
-    "dimensionType": "entity"
+    "dimensionType": "entity",
+    "uniqueIdentifier": true
   },
   "recipient:bank:branch:name": {
     "dataType": "string",
@@ -1081,13 +1197,24 @@
     "dataType": "string", 
     "dimensionType": "entity",
     "labelfor": "supplier:generic:id"
-  }, 
+  },
   "value": {
     "dataType": "number"
   },
+  "value-kind:code": {
+    "dataType": "string",
+    "dimensionType": "other",
+    "uniqueIdentifier": true
+  },
+  "value-kind:label": {
+    "dataType": "string",
+    "dimensionType": "other",
+    "labelfor": "value-kind:code"
+  },
   "fin-source:generic:code": {
     "dimensionType": "other",
-    "dataType": "string"
+    "dataType": "string",
+    "uniqueIdentifier": true
   },
   "fin-source:generic:label": {
     "dataType": "string",
@@ -1096,7 +1223,8 @@
   },
   "fin-source:generic:level1:code": {
     "dimensionType": "other",
-    "dataType": "string"
+    "dataType": "string",
+    "uniqueIdentifier": true
   },
   "fin-source:generic:level1:label": {
     "dataType": "string",
@@ -1106,12 +1234,14 @@
   "fin-source:generic:level2:code:full": {
     "dimensionType": "other",
     "dataType": "string",
-    "parent": "fin-source:generic:level1:code"
+    "parent": "fin-source:generic:level1:code",
+    "uniqueIdentifier": true
   },
   "fin-source:generic:level2:code:part": {
     "dimensionType": "other",
     "dataType": "string",
-    "parent": "fin-source:generic:level1:code"
+    "parent": "fin-source:generic:level1:code",
+    "uniqueIdentifier": true
   },
   "fin-source:generic:level2:label": {
     "dimensionType": "other",
@@ -1121,12 +1251,14 @@
   "fin-source:generic:level3:code:full": {
     "dimensionType": "other",
     "dataType": "string",
-    "parent": "fin-source:generic:level2:code"
+    "parent": "fin-source:generic:level2:code",
+    "uniqueIdentifier": true
   },
   "fin-source:generic:level3:code:part": {
     "dimensionType": "other",
     "dataType": "string",
-    "parent": "fin-source:generic:level2:code"
+    "parent": "fin-source:generic:level2:code",
+    "uniqueIdentifier": true
   },
   "fin-source:generic:level3:label": {
     "dimensionType": "other",
@@ -1135,7 +1267,8 @@
   },
   "expenditure-type:code": {
     "dimensionType": "other",
-    "dataType": "string"
+    "dataType": "string",
+    "uniqueIdentifier": true
   },
   "expenditure-type:label": {
     "dimensionType": "other",

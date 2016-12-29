@@ -570,6 +570,33 @@ describe('os-types', function() {
       });
     });
 
+    it('should have unique for all codes', function() {
+      _.forEach(osTypes, function(osTypeValue, osType) {
+        var parts = osType.split(':');
+        var codes = ['id', 'code'];
+        var found = false;
+        _.forEach(codes, function (code) {
+          var startFrom = parts.length-2;
+          if (startFrom<0) { startFrom = 0; }
+          if (_.lastIndexOf(parts, code) >= startFrom) {
+            var unique = osTypeValue.uniqueIdentifier;
+            if (!unique) {
+              console.log('MISSING "uniqueIdentifier" FOR', osType);
+            }
+            expect(unique).to.be.true;
+            found = true;
+          }
+        });
+        if (!found && osTypeValue.labelfor) {
+          var unique = osTypeValue.uniqueIdentifier;
+          if (unique) {
+            console.log('FOUND strange "uniqueIdentifier" FOR', osType);
+          }
+          expect(unique).to.not.be.true;
+        }
+      });
+    });
+
 
   });
 

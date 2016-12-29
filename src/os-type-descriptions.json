@@ -332,6 +332,30 @@
     "description": "Date related data types",
     "group": "100-Time"
   },
+  "date:fiscal:": {
+    "displayName": "Fiscal Dates",
+    "description": "Specific dates related to fiscal events"
+  },
+  "date:fiscal:activity-start": {
+    "displayName": "Start Date",
+    "description": "The starting date of a specific activity"
+  },
+  "date:fiscal:activity-end": {
+    "displayName": "Ending Date",
+    "description": "The ending date of a specific activity"
+  },
+  "date:fiscal:activity-approval": {
+    "displayName": "Approval Date",
+    "description": "The approval date of a specific activity"
+  },
+  "date:fiscal:first-payment": {
+    "displayName": "First Payment Date",
+    "description": "The date of the first payment for a specific activity"
+  },
+  "date:fiscal:final-payment": {
+    "displayName": "Final Payment Date",
+    "description": "The date of the last payment for a specific activity"
+  },
   "date:fiscal-year": {
     "displayName": "Fiscal year",
     "description": "The fiscal-year for which the values in this record are relevant"
@@ -908,6 +932,74 @@
     "description": "Geographic information related to the record (e.g. related city, region etc.)",
     "group": "600-Geographic"
   },
+  "geo-source:address:": {
+    "displayName": "Information regarding address",
+    "description": "Geographic information which is an address"
+  },
+  "geo-source:address:country:": {
+    "displayName": "Country in address",
+    "description": "The country part of the address"
+  },
+  "geo-source:address:country:code": {
+    "displayName": "Country-code in address",
+    "description": "The code of the country part of the address"
+  },
+  "geo-source:address:country:label": {
+    "displayName": "Country name in address",
+    "description": "The name of the country part of the address"
+  },
+  "geo-source:address:region:": {
+    "displayName": "Region in address",
+    "description": "The region part of the address"
+  },
+  "geo-source:address:region:code": {
+    "displayName": "Region-code in address",
+    "description": "The code of the region part of the address"
+  },
+  "geo-source:address:region:label": {
+    "displayName": "Region name in address",
+    "description": "The name of the region part of the address"
+  },
+  "geo-source:address:county:": {
+    "displayName": "County in address",
+    "description": "The county part of the address"
+  },
+  "geo-source:address:county:code": {
+    "displayName": "County-code in address",
+    "description": "The code of the county part of the address"
+  },
+  "geo-source:address:county:label": {
+    "displayName": "County name in address",
+    "description": "The name of the county part of the address"
+  },
+  "geo-source:address:city:": {
+    "displayName": "City in address",
+    "description": "The city part of the address"
+  },
+  "geo-source:address:city:code": {
+    "displayName": "City-code in address",
+    "description": "The code of the city part of the address"
+  },
+  "geo-source:address:city:label": {
+    "displayName": "City name in address",
+    "description": "The name of the city part of the address"
+  },
+  "geo-source:address:zip:": {
+    "displayName": "Postal code in address",
+    "description": "The postal code in the address"
+  },
+  "geo-source:address:zip:code": {
+    "displayName": "Postal code in address",
+    "description": "The postal code in the address"
+  },
+  "geo-source:address:street-address:": {
+    "displayName": "Actual street address",
+    "description": "Actual street address in whole address"
+  },
+  "geo-source:address:street-address:description": {
+    "displayName": "Actual street address",
+    "description": "Actual street address in whole address"
+  },
   "geo-source:generic:": {
     "displayName": "Other Geographic information",
     "description": "Geographic information which is can't be associated with any other category"
@@ -1100,6 +1192,50 @@
     "displayName": "Display Name",
     "description": "The display name for the Recipient"
   },
+  "recipient:generic:url": {
+    "displayName": "URL",
+    "description": "An Internet address for the Recipient"
+  },
+  "recipient:generic:legal-entity:": {
+    "displayName": "Information regarding a legal entity",
+    "description": "Information regarding the legal entity (e.g. company) which is the recipient"
+  },
+  "recipient:generic:legal-entity:code": {
+    "displayName": "Legal entity code",
+    "description": "Unique identifier for the legal entity"
+  },
+  "recipient:generic:legal-entity:label": {
+    "displayName": "Legal entity display name",
+    "description": "Trading name (or other) of the legal entity"
+  },
+  "recipient:generic:legal-entity:point-of-contact:": {
+    "displayName": "POC inside the legal entity",
+    "description": "Information regarding a person representing the legal entity"
+  },
+  "recipient:generic:legal-entity:point-of-contact:description": {
+    "displayName": "POC details",
+    "description": "Text describing the representative of the legal entity"
+  },
+  "recipient:generic:legal-entity:receiving-project:": {
+    "displayName": "Specific project details",
+    "description": "Information regarding a specific project inside the legal entity"
+  },
+  "recipient:generic:legal-entity:receiving-project:code": {
+    "displayName": "Project code",
+    "description": "Code of the specific project inside the legal entity"
+  },
+  "recipient:generic:legal-entity:receiving-project:status": {
+    "displayName": "Project status",
+    "description": "Status of the specific project inside the legal entity"
+  },
+  "recipient:generic:legal-entity:receiving-project:label": {
+    "displayName": "Project name",
+    "description": "Name of the specific project inside the legal entity"
+  },
+  "recipient:generic:legal-entity:receiving-project:description": {
+    "displayName": "Project description",
+    "description": "Name of the specific project inside the legal entity"
+  },
   "recipient:bank:": {
     "displayName": "Bank",
     "description": "Bank information for the Recipient"
@@ -1145,6 +1281,19 @@
     "displayName": "Amount",
     "description": "Numeric value depicting a fiscal amount related to the budget item, spending transaction etc.",
     "group": "800-Amount"
+  },
+  "value-kind:": {
+    "displayName": "Amount Kind",
+    "description": "Textual value describing the amounts in this row",
+    "group": "800-Amount"
+  },
+  "value-kind:code": {
+    "displayName": "Code for Amount Kind",
+    "description": "Unique identifier for the amount kind"
+  },
+  "value-kind:label": {
+    "displayName": "Label for Amount Kind",
+    "description": "Display name for the amount kind"
   },
   "fin-source:": {
     "displayName": "Financial Source",
