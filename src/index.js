@@ -244,7 +244,7 @@ class TypeProcessor {
             if (!f.title) {
                 f.title = f.name;
             }
-            f.slug = this._titleToSlug(f.title, f.type);
+            f.slug = this._titleToSlug(f.name, f.type);
             var conceptType = _.split(f.type,':')[0];
             schema.fields[f.name] = {
                 title: f.title,

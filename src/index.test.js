@@ -160,11 +160,12 @@ describe('os-types', function() {
       title_pairs.forEach((titles) => {
         let s = [];
         for (let i = 0; i < titles.length; i++) {
-          s.push({type: types[i], name: titles[i][0]});
+          s.push({type: types[i], name: titles[i][0], title: 'dummy-title-'+i });
         }
         var model = tp.fieldsToModel(s);
         expect(model).to.not.equal(null);
         var schema = model.schema;
+        expect(schema).to.be.ok;
         titles.forEach((pair) => {
           expect(schema.fields[pair[0]].slug).to.equal(pair[1]);
         });
