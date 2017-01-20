@@ -4,9 +4,9 @@ import {expect} from 'chai';
 import TypeProcessor from './index';
 import * as extraOptions from './extra-options'
 import _ from 'lodash';
-import JTS from 'jsontableschema';
-var osTypes = require('./os-types.json');
-var osTypeDescriptions = require('./os-type-descriptions.json');
+let Schema = require('jsontableschema').Schema;
+let osTypes = require('./os-types.json');
+let osTypeDescriptions = require('./os-type-descriptions.json');
 
 describe('os-types', function() {
   var tp = new TypeProcessor();
@@ -231,10 +231,13 @@ describe('os-types', function() {
         var model = tp.fieldsToModel(fields);
         expect(model).to.be.ok;
         if ( _case[3] ) {
-          expect(model.errors).to.be.ok;
-          expect(model.errors.perField).to.be.ok;
-          expect(model.errors.perField.dummy).to.be.ok;
-          expect(model.errors.perField.dummy).to.match(/^Data cannot be cast to this type/);
+          expect(model.promise).to.be.ok;
+          model.promise.then(() => {
+            expect(model.errors).to.be.ok;
+            expect(model.errors.perField).to.be.ok;
+            expect(model.errors.perField.dummy).to.be.ok;
+            expect(model.errors.perField.dummy).to.match(/^Data cannot be cast to this type/);
+          });
         } else {
           if (model.errors) {
             console.log(model.errors);
@@ -277,12 +280,15 @@ describe('os-types', function() {
       ];
       var model = tp.fieldsToModel(fields);
       expect(model).to.be.ok;
-      expect(model.errors).to.be.ok;
-      expect(model.errors.perField).to.be.ok;
-      expect(model.errors.perField.dummy1).to.be.ok;
-      expect(model.errors.perField.dummy1).to.match(/^Data cannot be cast to this type/);
-      expect(model.errors.perField.dummy2).to.be.ok;
-      expect(model.errors.perField.dummy2).to.match(/^Data cannot be cast to this type/);
+      expect(model.promise).to.be.ok;
+      model.promise.then(() => {
+        expect(model.errors).to.be.ok;
+        expect(model.errors.perField).to.be.ok;
+        expect(model.errors.perField.dummy1).to.be.ok;
+        expect(model.errors.perField.dummy1).to.match(/^Data cannot be cast to this type/);
+        expect(model.errors.perField.dummy2).to.be.ok;
+        expect(model.errors.perField.dummy2).to.match(/^Data cannot be cast to this type/);
+      });
     });
     it('creates correctly dimensions & measures', function () {
       var fields = _.map(tp.getAllTypes(), (type) => {
@@ -489,19 +495,15 @@ describe('os-types', function() {
     });
   });
 
-  describe('os-types definition', function() {
+  describe('os-types definition', function(done) {
     it('should contain only JTS valid types', function() {
+      let fields = [];
       _.forEach(osTypes, function(osTypeValue, osType) {
-        var dataType = null;
-        _.forEach(JTS.types, function(JTSTypeValue, JTSType) {
-          if (_.endsWith(JTSType, 'Type') ) {
-            var JTSObj = new JTSTypeValue();
-            if (JTSObj.name === osTypeValue.dataType) {
-              dataType = osTypeValue.dataType;
-            }
-          }
-        });
-        expect(dataType).to.not.be.null;
+        fields.push({name: osType, type: osTypeValue.dataType});
+      });
+      let JTSSchema = new Schema({fields: fields});
+      return JTSSchema.then((schema) => {
+        expect(schema).to.not.be.null;
       });
     });
 

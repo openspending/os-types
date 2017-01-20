@@ -1,9 +1,10 @@
 'use strict';
-var os_types = require('./os-types.json');
-var os_type_descriptions = require('./os-type-descriptions.json');
-var extraOptions = require('./extra-options.js');
-var _ = require('lodash-addons');
-var JTS = require('jsontableschema').types;
+let os_types = require('./os-types.json');
+let os_type_descriptions = require('./os-type-descriptions.json');
+let extraOptions = require('./extra-options.js');
+let _ = require('lodash-addons');
+let JTS = require('jsontableschema');
+let Schema = JTS.Schema;
 
 class TypeProcessor {
 
@@ -160,11 +161,17 @@ class TypeProcessor {
                     options = _.mapValues(options, (value, key) => {
                         return (typeOptions[key].transform || this.ident)(value);
                     });
-                    var jtsType = this._getJTSTypeByName(this.types[f.type].dataType, options);
-                    _.every(f.data, (datum) => {
-                        return jtsType.cast(datum) ||
-                          this._fieldError(f.name, "Data cannot be cast to this type '"+datum+"'");
-                    });
+                    let jtsSchemaObj = {fields: [{name: '_', type: this.types[f.type].dataType}]};
+                    this._promise(new Schema(jtsSchemaObj).then((schema) => {
+                      _.every(f.data, (datum) => {
+                        try {
+                          schema.castRow([datum]);
+                        }
+                        catch(e) {
+                          this._fieldError(f.name, "Data cannot be cast to this type '" + datum + "'");
+                        }
+                      });
+                    }));
                 }
             });
         }
@@ -210,6 +217,16 @@ class TypeProcessor {
         }
         fieldErrors.push(err);
         return false;
+    }
+
+    _promise(promise) {
+        if (!!this.promise) {
+            this.promise.then(() => {
+                return promise;
+            });
+        } else {
+            this.promise = promise;
+        }
     }
 
     _embedOptions(target, options, availableOptions) {
@@ -379,6 +396,9 @@ class TypeProcessor {
         var fdp = {model, schema};
         if (this.errors.general.length || _.keys(this.errors.perField).length) {
             fdp.errors = this.errors;
+        }
+        if (!!this.promise) {
+            fdp.promise = this.promise;
         }
         //console.log(JSON.stringify(fdp,null,2));
         return fdp;

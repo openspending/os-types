@@ -10,24 +10,36 @@ if (process.argv.length != 3) {
 let fields = JSON.parse(process.argv[2]);
 let tp = new TypeProcessor();
 let output = tp.fieldsToModel(fields);
-if (output.errors) {
-  console.log('FAILED');
-  if (output.errors.general) {
-    for (var msg of output.errors.general) {
-      console.log(' - '+msg);
-    }
-  }
-  if (output.errors.perField) {
-    for (var field in output.errors.perField) {
-      console.log(field+':');
-      for (var msg of output.errors.perField[field]) {
-        console.log('\t'+msg)
-      }
 
+function handleErrors() {
+  if (output.errors) {
+    console.log('FAILED');
+    if (output.errors.general) {
+      for (var msg of output.errors.general) {
+        console.log(' - '+msg);
+      }
     }
+    if (output.errors.perField) {
+      for (var field in output.errors.perField) {
+        console.log(field+':');
+        for (var msg of output.errors.perField[field]) {
+          console.log('\t'+msg)
+        }
+
+      }
+    }
+    process.exit(1);
   }
-  process.exit(1);
+
+  console.log(JSON.stringify(output));
+  process.exit(0);
 }
 
-console.log(JSON.stringify(output));
-process.exit(0);
+if (output.promise) {
+  output.promise.then(() => {
+    handleErrors();
+  })
+} else {
+  handleErrors();
+}
+
