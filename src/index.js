@@ -103,7 +103,7 @@ class TypeProcessor {
         // ... and no unknown properties ...
         var allowedProperties = [
             'name', 'title', 'type', 'format', 'data',
-            'options', 'resource', 'description' // common properties
+            'options', 'resource', 'description', 'constant' // common properties
         ];
         valid = valid &&
             _.every(fields, (f) => {
@@ -310,6 +310,9 @@ class TypeProcessor {
                 };
                 if ( f.resource ) {
                     attribute.resource = f.resource;
+                }
+                if ( f.constant ) {
+                    attribute.constant = f.constant;
                 }
                 dimension.attributes[f.slug] = attribute;
                 if (osType.uniqueIdentifier) {

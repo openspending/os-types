@@ -314,6 +314,31 @@ describe('os-types', function() {
         }
       });
     });
+    it('creates correctly constant attribues', function () {
+      let fields = [
+        {
+          name: "normal-field",
+          type: "value"
+        },
+        {
+          name: "constant-field",
+          type: "date:generic",
+          constant: "2010-01-01"
+        }
+      ];
+      var ret = tp.fieldsToModel(fields);
+      expect(ret).to.not.equal(null);
+      var model = ret.model;
+      console.log(JSON.stringify(ret));
+      expect(model).to.be.ok;
+      expect(model.dimensions).to.be.ok;
+      expect(model.measures).to.be.ok;
+      expect(model.dimensions.date).to.be.ok;
+      let attr = model.dimensions.date.attributes.constant_field;
+      expect(attr).to.be.ok;
+      expect(attr.source).to.equal('constant-field');
+      expect(attr.constant).to.equal("2010-01-01");
+    });
     it('adds correctly labelfor and parent', function () {
       var fields = [
         {type: 'administrative-classification:generic:level1:code', name: 'lvl1-code'},
