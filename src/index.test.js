@@ -329,7 +329,6 @@ describe('os-types', function() {
       var ret = tp.fieldsToModel(fields);
       expect(ret).to.not.equal(null);
       var model = ret.model;
-      console.log(JSON.stringify(ret));
       expect(model).to.be.ok;
       expect(model.dimensions).to.be.ok;
       expect(model.measures).to.be.ok;
