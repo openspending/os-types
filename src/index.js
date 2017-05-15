@@ -11,6 +11,34 @@ class TypeProcessor {
     constructor() {
         this.types = os_types;
         this.ident = x => { return x; }
+        this._addExtraTypes();
+    }
+
+    _addExtraTypes() {
+        for (let i = 1 ; i <= 20 ; i++) {
+            this.types[`unknown:string-${i}:code`] = {
+                dimensionType: "other",
+                dataType: "string",
+                uniqueIdentifier: true
+            };
+            this.types[`unknown:string-${i}:label`] = {
+                dimensionType: "other",
+                dataType: "string",
+                labelfor: `unknown:string-${i}:code`
+            };
+            os_type_descriptions[`unknown:string-${i}:`] = {
+                displayName: `unknown dimension #${i}`,
+                description: `Placeholder for an unknown dimension #${i}`
+            };
+            os_type_descriptions[`unknown:string-${i}:code`] = {
+                displayName: `unknown dimension #${i} code`,
+                description: `Unknown dimension #${i}'s code`
+            };
+            os_type_descriptions[`unknown:string-${i}:label`] = {
+                displayName: `unknown dimension #${i} label`,
+                description: `Unknown dimension #${i}'s label`
+            };
+        }
     }
 
     getAllTypes() {
