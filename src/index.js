@@ -15,7 +15,7 @@ class TypeProcessor {
     }
 
     _addExtraTypes() {
-        for (let i = 1 ; i <= 20 ; i++) {
+        for (let i = 1 ; i <= 40 ; i++) {
             this.types[`unknown:string-${i}:code`] = {
                 dimensionType: "other",
                 dataType: "string",
