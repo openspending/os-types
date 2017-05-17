@@ -1406,5 +1406,9 @@
   "unknown:number": {
     "displayName": "Unknown Mapping - Number",
     "description": "An unknown numeric column with no mapping"
+  },
+  "unknown:integer": {
+    "displayName": "Unknown Mapping - Integer",
+    "description": "An unknown integer column with no mapping"
   }
 }

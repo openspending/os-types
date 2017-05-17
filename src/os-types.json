@@ -1298,5 +1298,9 @@
   "unknown:number": {
     "dimensionType": "other",
     "dataType": "number"
+  },
+  "unknown:integer": {
+    "dimensionType": "other",
+    "dataType": "integer"
   }
 }
