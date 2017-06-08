@@ -1,6 +1,6 @@
 'use strict';
-let os_types = require('./os-types.json');
-let os_type_descriptions = require('./os-type-descriptions.json');
+let osTypes = require('./os-types.json');
+let osTypesDescriptions = require('./os-type-descriptions.json');
 let extraOptions = require('./extra-options.js');
 let _ = require('lodash-addons');
 let JTS = require('jsontableschema');
@@ -9,7 +9,8 @@ let Schema = JTS.Schema;
 class TypeProcessor {
 
     constructor() {
-        this.types = os_types;
+        this.types = osTypes;
+        this.typesDescriptions = osTypesDescriptions;
         this.ident = x => { return x; }
         this._addExtraTypes();
     }
@@ -26,15 +27,15 @@ class TypeProcessor {
                 dataType: "string",
                 labelfor: `unknown:string-${i}:code`
             };
-            os_type_descriptions[`unknown:string-${i}:`] = {
+            this.typesDescriptions[`unknown:string-${i}:`] = {
                 displayName: `unknown dimension #${i}`,
                 description: `Placeholder for an unknown dimension #${i}`
             };
-            os_type_descriptions[`unknown:string-${i}:code`] = {
+            this.typesDescriptions[`unknown:string-${i}:code`] = {
                 displayName: `unknown dimension #${i} code`,
                 description: `Unknown dimension #${i}'s code`
             };
-            os_type_descriptions[`unknown:string-${i}:label`] = {
+            this.typesDescriptions[`unknown:string-${i}:label`] = {
                 displayName: `unknown dimension #${i} label`,
                 description: `Unknown dimension #${i}'s label`
             };
@@ -85,7 +86,7 @@ class TypeProcessor {
             return ret;
         });
         options = _.map(_.uniq(options), (k) => {
-            return _.extend({type:k}, os_type_descriptions[k]);
+            return _.extend({type:k}, this.typesDescriptions[k]);
         });
         options = _.sortBy(options, 'type');
         options = _.sortBy(options, 'group');
