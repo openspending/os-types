@@ -7,7 +7,7 @@
     "build": "babel src/index.js -o dist/index.js && babel src/extra-options.js -o dist/extra-options.js",
     "postbuild": "cp src/*.json dist/",
     "commit": "git-cz",
-    "check-coverage": "istanbul check-coverage --statements 90 --branches 90 --functions 90 --lines 90",
+    "check-coverage": "istanbul check-coverage --statements 85 --branches 85 --functions 85 --lines 85",
     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "start": "npm run test",
     "test": "mocha src/index.test.js --compilers js:babel/register",
@@ -45,6 +45,7 @@
     "ghooks": "0.3.2",
     "istanbul": "git+https://github.com/gotwarlost/istanbul#source-map",
     "mocha": "^5.2.0",
+    "mocha-each": "^1.1.0",
     "semantic-release": "^4.3.5",
     "word-wrap": "^1.1.0"
   },
