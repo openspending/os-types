@@ -298,7 +298,7 @@ class TypeProcessor {
                 slug: f.slug,
                 type: osType.dataType,
                 format: osType.format || f.format || 'default',
-                osType: f.type,
+                columnType: f.type,
                 conceptType: conceptType,
                 resource: f.resource,
                 options: _.union(
@@ -357,13 +357,13 @@ class TypeProcessor {
             }
             if ( osType ) {
                 var field = _.find(_.values(schema.fields), (i) => {
-                    return _.startsWith(i.osType, osType);
+                    return _.startsWith(i.columnType, osType);
                 });
                 return findAttribute(field);
             }
         };
         _.forEach(_.values(schema.fields), (field) => {
-            var osType = this.types[field.osType];
+            var osType = this.types[field.columnType];
             var labelfor = osType.labelfor;
             var parent = osType.parent;
             if ( labelfor || parent ) {
@@ -388,7 +388,7 @@ class TypeProcessor {
                         break;
                     } else if (!parent) {
                         this._fieldError(field.name, "Couldn't find a column mapped to the parent of this type ("+
-                                                     (this.types[field.osType].parent)+")");
+                                                     (this.types[field.columnType].parent)+")");
                     }
                 }
             }
