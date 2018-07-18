@@ -1020,6 +1020,16 @@
     "dimensionType": "other",
     "labelfor": "value-kind:code"
   },
+  "value-currency:code": {
+    "dataType": "string",
+    "dimensionType": "other",
+    "uniqueIdentifier": true
+  },
+  "value-currency:label": {
+    "dataType": "string",
+    "dimensionType": "other",
+    "labelfor": "value-currency:code"
+  },
   "fin-source:generic:code": {
     "dimensionType": "other",
     "dataType": "string",

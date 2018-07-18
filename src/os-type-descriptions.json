@@ -1071,6 +1071,19 @@
     "displayName": "Label for Amount Kind",
     "description": "Display name for the amount kind"
   },
+  "value-currency:": {
+    "displayName": "Amount Currency",
+    "description": "Textual value describing the amount currency in this row",
+    "group": "800-Amount"
+  },
+  "value-currency:code": {
+    "displayName": "Code for Amount Currency",
+    "description": "Unique identifier for the amount currency"
+  },
+  "value-currency:label": {
+    "displayName": "Label for Amount Currency",
+    "description": "Display name for the amount currency"
+  },
   "fin-source:": {
     "displayName": "Financial Source",
     "description": "The Financial source for budgetary funds",
