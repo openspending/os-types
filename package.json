@@ -7,10 +7,10 @@
     "build": "babel src/index.js -o dist/index.js && babel src/extra-options.js -o dist/extra-options.js",
     "postbuild": "cp src/*.json dist/",
     "commit": "git-cz",
-    "check-coverage": "istanbul check-coverage --statements 90 --branches 90 --functions 90 --lines 90",
+    "check-coverage": "istanbul check-coverage --statements 85 --branches 85 --functions 85 --lines 85",
     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "start": "npm run test",
-    "test": "mocha src/index.test.js -w --watch-extensions json --compilers js:babel/register",
+    "test": "mocha src/index.test.js --compilers js:babel/register",
     "pretest:single": "npm run build",
     "test:single": "cp src/index.test.js dist/ && istanbul cover -x *.test.js _mocha -- -R spec dist/index.test.js --compilers js:babel/register && rm dist/index.test.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
@@ -39,12 +39,13 @@
   "devDependencies": {
     "babel": "5.8.21",
     "chai": "3.3.0",
-    "coveralls": "^2.11.9",
     "commitizen": "1.0.5",
+    "coveralls": "^2.11.9",
     "cz-conventional-changelog": "^1.1.5",
     "ghooks": "0.3.2",
     "istanbul": "git+https://github.com/gotwarlost/istanbul#source-map",
-    "mocha": "2.2.5",
+    "mocha": "^5.2.0",
+    "mocha-each": "^1.1.0",
     "semantic-release": "^4.3.5",
     "word-wrap": "^1.1.0"
   },
@@ -59,5 +60,5 @@
   "bin": {
     "os-types": "src/cli.js"
   },
-  "version": "0.0.0"
+  "version": "1.15.1-alpha.2"
 }
