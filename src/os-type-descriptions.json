@@ -33,7 +33,7 @@
     "description": "A label, title or display name for this program"
   },
   "activity:generic:subprogram:": {
-    "displayName": "Project",
+    "displayName": "Sub-Program",
     "description": "The subprogram that's being funded or related to the spending line"
   },
   "activity:generic:subprogram:code": {
@@ -841,7 +841,7 @@
     "description": "Unique identifier or code for the Top Level Geographic feature specified in the data"
   },
   "geo-source:target:level1:title": {
-    "displayName": "Unique identifier",
+    "displayName": "Display Name",
     "description": "The display name for the Top Level Geographic feature specified in the data"
   },
   "geo-source:target:level2:": {
@@ -853,7 +853,7 @@
     "description": "Unique identifier or code for the 2nd Level Geographic feature specified in the data"
   },
   "geo-source:target:level2:title": {
-    "displayName": "Unique identifier",
+    "displayName": "Display Name",
     "description": "The display name for the 2nd Level Geographic feature specified in the data"
   },
   "transaction-id:": {
