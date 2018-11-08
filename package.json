@@ -60,5 +60,5 @@
   "bin": {
     "os-types": "src/cli.js"
   },
-  "version": "1.15.2-0"
+  "version": "1.15.2"
 }
