@@ -432,7 +432,6 @@ class TypeProcessor {
         if (!!this.promise) {
             fdp.promise = this.promise;
         }
-        //console.log(JSON.stringify(fdp,null,2));
         return fdp;
     }
 }
