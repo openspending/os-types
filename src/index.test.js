@@ -437,8 +437,6 @@ describe('os-types', function() {
         .to.be.eql([
         'format'
       ]);
-      expect(schema['transaction-date'].options[0].transform('abc'))
-        .to.be.equal('fmt:abc');
     });
     it('embeds correctly options in schema, measures and dimensions', function () {
       var fields = [
@@ -470,7 +468,6 @@ describe('os-types', function() {
       expect(schema.fields.measure.type).to.be.equal('number');
       expect(schema.fields.measure.format).to.be.equal('default');
       expect(schema.fields.transaction_date.type).to.be.equal('date');
-      expect(schema.fields.transaction_date.format).to.be.equal('fmt:12345');
     });
     it('embeds correctly default values for options in measures', function () {
       var fields = [
