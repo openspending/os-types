@@ -42,10 +42,7 @@ module.exports =
         {
           name: 'format',
           title: 'Format',
-          defaultValue: '%Y-%m-%dT%H:%M:%SZ',
-          transform: (f) => {
-            return 'fmt:'+f;
-          }
+          defaultValue: '%Y-%m-%dT%H:%M:%SZ'
         }
       ]
     },
@@ -54,10 +51,7 @@ module.exports =
         {
           name: 'format',
           title: 'Format',
-          defaultValue: '%Y-%m-%d',
-          transform: (f) => {
-            return 'fmt:'+f;
-          }
+          defaultValue: '%Y-%m-%d'
         }
       ]
     },
@@ -66,10 +60,7 @@ module.exports =
         {
           name: 'format',
           title: 'Format',
-          defaultValue: '%H:%M:%S',
-          transform: (f) => {
-            return 'fmt:'+f;
-          }
+          defaultValue: '%H:%M:%S'
         }
       ]
     },
