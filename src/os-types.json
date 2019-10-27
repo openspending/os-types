@@ -53,6 +53,10 @@
     "dimensionType": "activity",
     "labelfor": "activity:generic:subproject:code"
   },
+  "activity:generic:subproject:kind": {
+    "dataType": "string",
+    "dimensionType": "activity"
+  },
   "administrative-classification:generic:code": {
     "classificationType": "administrative",
     "dataType": "string",
@@ -1085,6 +1089,57 @@
   "budgetary-transfers": {
     "dimensionType": "other",
     "dataType": "string"
+  },
+  "object-classification:generic:level1:code": {
+    "classificationType": "object",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "uniqueIdentifier": true
+  },
+  "object-classification:generic:level1:label": {
+    "classificationType": "object",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "object-classification:generic:level1:code"
+  },
+  "object-classification:generic:level2:code": {
+    "classificationType": "object",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "object-classification:generic:level1:code",
+    "uniqueIdentifier": true
+  },
+  "object-classification:generic:level2:label": {
+    "classificationType": "object",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "object-classification:generic:level2:code"
+  },
+  "object-classification:generic:level3:code": {
+    "classificationType": "object",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "object-classification:generic:level2:code",
+    "uniqueIdentifier": true
+  },
+  "object-classification:generic:level3:label": {
+    "classificationType": "object",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "object-classification:generic:level3:code"
+  },
+  "object-classification:generic:level4:code": {
+    "classificationType": "object",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "parent": "object-classification:generic:level3:code",
+    "uniqueIdentifier": true
+  },
+  "object-classification:generic:level4:label": {
+    "classificationType": "object",
+    "dataType": "string",
+    "dimensionType": "classification",
+    "labelfor": "object-classification:generic:level4:code"
   },
   "unknown:string": {
     "dimensionType": "other",

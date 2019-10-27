@@ -68,6 +68,10 @@
     "displayName": "Display Name",
     "description": "A label, title or display name for this sub-project"
   },
+  "activity:generic:subproject:kind": {
+    "displayName": "Kind",
+    "description": "A label describing the kind or type of this sub-project"
+  },
   "administrative-classification:": {
     "displayName": "Administrative Classification",
     "description": "The entity responsible for managing the public funds",
@@ -1154,6 +1158,63 @@
     "displayName": "Budgetary Transfers",
     "description": "Extra properties regarding whether the expenditure contains budgetary transfers",
     "group": "500-Fiscal Attributes"
+  },
+  "object-classification:": {
+    "displayName": "Object Classification",
+    "description": "Classification of expenditure according to the purchaesd good",
+    "group": "201-Classifications"
+  },
+  "object-classification:generic:": {
+    "displayName": "Non-standard Object Classification",
+    "description": "Object Classification that does not adhere to a specific standard"
+  },
+  "object-classification:generic:level1:": {
+    "displayName": "Top Classification Level",
+    "description": "Top level of the Object Classification"
+  },
+  "object-classification:generic:level1:code": {
+    "displayName": "Unique Identifier",
+    "description": "A code or unique identifier for the top level of the classification"
+  },
+  "object-classification:generic:level1:label": {
+    "displayName": "Display Name",
+    "description": "A label, title or display name for this level of the classification"
+  },
+  "object-classification:generic:level2:": {
+    "displayName": "2nd Classification Level",
+    "description": "2nd level of the Object Classification"
+  },
+  "object-classification:generic:level2:code": {
+    "displayName": "Unique Identifier",
+    "description": "A code or unique identifier for the 2nd level of the classification"
+  },
+  "object-classification:generic:level2:label": {
+    "displayName": "Display Name",
+    "description": "A label, title or display name for this level of the classification"
+  },
+  "object-classification:generic:level3:": {
+    "displayName": "3rd Classification Level",
+    "description": "3rd level of the Object Classification"
+  },
+  "object-classification:generic:level3:code": {
+    "displayName": "Unique Identifier",
+    "description": "A code or unique identifier for the 3rd level of the classification"
+  },
+  "object-classification:generic:level3:label": {
+    "displayName": "Display Name",
+    "description": "A label, title or display name for this level of the classification"
+  },
+  "object-classification:generic:level4:": {
+    "displayName": "4th Classification Level",
+    "description": "4th level of the Object Classification"
+  },
+  "object-classification:generic:level4:code": {
+    "displayName": "Unique Identifier",
+    "description": "A code or unique identifier for the 4th level of the classification"
+  },
+  "object-classification:generic:level4:label": {
+    "displayName": "Display Name",
+    "description": "A label, title or display name for this level of the classification"
   },
   "unknown:": {
     "displayName": "Unknown Mapping",
