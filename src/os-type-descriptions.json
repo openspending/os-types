@@ -276,6 +276,10 @@
     "displayName": "Fiscal year",
     "description": "The fiscal-year for which the values in this record are relevant"
   },
+  "date:fiscal-month": {
+    "displayName": "Fiscal month",
+    "description": "The fiscal-month for which the values in this record are relevant"
+  },
   "date:generic": {
     "displayName": "Other date",
     "description": "An non-specific date related to the values in this record (e.g. transaction date etc.)"

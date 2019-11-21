@@ -237,6 +237,12 @@
     "dimensionType": "datetime",
     "uniqueIdentifier": true
   },
+  "date:fiscal-month": {
+    "dataType": "integer",
+    "dimensionType": "datetime",
+    "parent": "date:fiscal-year",
+    "uniqueIdentifier": true
+  },
   "date:generic": {
     "dataType": "date",
     "dimensionType": "datetime",
